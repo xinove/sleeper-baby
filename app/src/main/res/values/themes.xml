@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.SleeperBaby" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@color/night_navy</item>
+        <item name="android:navigationBarColor">@color/night_navy</item>
+        <item name="android:windowBackground">@color/night_navy</item>
+    </style>
+</resources>

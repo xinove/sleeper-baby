@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Sleeper Baby</string>
+    <string name="notification_channel_name">Radio de cuna</string>
+    <string name="notification_channel_desc">Mantiene las emisoras sonando con la pantalla apagada</string>
+</resources>
