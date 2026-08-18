@@ -3,90 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad - Audioguía Edimburgo</title>
-    <style>
-        body {
-            background-color: #1a1a1a;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            padding: 40px 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #2d2d2d;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        h1 {
-            color: #d4af37;
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #444;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #d4af37;
-            font-size: 1.4rem;
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }
-        p, li {
-            color: #cccccc;
-            font-size: 1rem;
-            margin-bottom: 15px;
-        }
-        ul {
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            color: #d4af37;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>Política de privacidad — Sleeper Baby</title>
+    <meta name="description" content="Política de privacidad de la aplicación Android Sleeper Baby, de conformidad con Google Play.">
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="sky" aria-hidden="true"></div>
+    <div class="stars" aria-hidden="true"></div>
+    <div class="stars-2" aria-hidden="true"></div>
 
-    <div class="container">
-        <h1>Política de Privacidad</h1>
-        <p><strong>Última actualización:</strong> 25 de mayo de 2026</p>
-        
-        <p>Esta Política de Privacidad describe cómo nuestra aplicación móvil <strong>Audioguía Edimburgo</strong> recopila, utiliza y comparte su información cuando utiliza nuestros servicios, de conformidad con los requisitos normativos de Google Play Store.</p>
+    <header class="wrap">
+        <nav>
+            <a class="brand" href="index.html">
+                <img src="icon.png" alt="Icono de Sleeper Baby">
+                <strong>Sleeper Baby</strong>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a class="is-active" href="privacy.html">Privacidad</a>
+            </div>
+        </nav>
+    </header>
 
-        <h2>1. Recopilación de Información y Privacidad</h2>
-        <p>Nuestra aplicación se ha desarrollado bajo el principio de minimización de datos y respeto absoluto a la privacidad del usuario:</p>
+    <article class="legal">
+        <h1>Política de privacidad</h1>
+        <p class="meta">Última actualización: 18 de agosto de 2026</p>
+
+        <p>
+            Esta política describe cómo la aplicación Android <strong>Sleeper Baby</strong>
+            (paquete <strong>com.sleeperbaby.app</strong>, desarrollada por Xinove)
+            trata la información cuando la usas, de acuerdo con los requisitos de Google Play.
+        </p>
+        <p>
+            Sleeper Baby está pensada para <strong>padres y cuidadores</strong> que quieren
+            ayudar a un bebé a dormir. No pide cuenta, nombre, correo ni datos del menor.
+        </p>
+
+        <h2>1. Qué no pedimos</h2>
         <ul>
-            <li><strong>Sin registro de cuentas:</strong> No requerimos que el usuario se registre, introduzca correos electrónicos ni cree una cuenta para disfrutar de los audios y contenidos de la aplicación.</li>
-            <li><strong>Datos de Localización (GPS):</strong> La aplicación puede solicitar acceso a la ubicación de su dispositivo (en primer plano mientras se usa la app). Este permiso se utiliza de forma exclusiva para detectar de manera automática si se encuentra cerca de un punto de interés (como la explanada del Castillo) y activar el audio correspondiente. Estos datos geográficos se procesan en tiempo real en el dispositivo y <strong>nunca</strong> se almacenan ni se envían a servidores externos.</li>
-            <li><strong>Datos técnicos anónimos:</strong> Podremos recibir datos de rendimiento técnico totalmente automatizados y anónimos proporcionados por el sistema operativo (como el modelo de dispositivo o un informe de error si la app se cierra) para solucionar fallos de estabilidad del reproductor.</li>
+            <li><strong>Sin registro:</strong> no hay inicio de sesión ni perfiles.</li>
+            <li><strong>Sin localización:</strong> la app no usa GPS ni pregunta dónde estás.</li>
+            <li><strong>Sin micrófono, cámara, contactos ni archivos personales.</strong></li>
+            <li>Los cuentos, nanas y ruidos se reproducen <strong>en el propio teléfono</strong>. No enviamos tu biblioteca ni tu historial de escucha a un servidor nuestro.</li>
         </ul>
 
-        <h2>2. Uso de la Información</h2>
-        <p>Los datos operativos del dispositivo procesados localmente se utilizan únicamente para garantizar el correcto funcionamiento técnico de la audioguía y sincronizar los audios con su paseo geográfico.</p>
+        <h2>2. Datos que se guardan en el dispositivo</h2>
+        <p>
+            En el almacenamiento local del teléfono (preferencias de Android) podemos guardar
+            información mínima para que la app recuerde el funcionamiento diario, por ejemplo:
+        </p>
+        <ul>
+            <li>la fecha del primer uso, para rotar el <strong>cuento del día</strong>;</li>
+            <li>si ya se mostró el aviso del cuento de hoy;</li>
+            <li>el canal, el volumen o el temporizador mientras usas la radio de cuna.</li>
+        </ul>
+        <p>
+            Estos datos <strong>no salen del dispositivo</strong> y puedes borrarlos
+            desinstalando la aplicación o limpiando su almacenamiento en Ajustes de Android.
+        </p>
 
-        <h2>3. Compartición de Datos con Terceros</h2>
-        <p>Dado que no recopilamos ni almacenamos datos personales en servidores externos, <strong>no vendemos, comercializamos, alquilamos ni compartimos</strong> ningún tipo de información del usuario con terceras empresas, agencias publicitarias ni redes de análisis de datos.</p>
+        <h2>3. Permisos</h2>
+        <ul>
+            <li><strong>Internet:</strong> necesario para mostrar anuncios y para que el SDK de Google Ads se inicialice.</li>
+            <li><strong>Reproducción en segundo plano y notificaciones:</strong> para que la nana siga sonando con la pantalla apagada y puedas pausar desde la barra o los auriculares.</li>
+            <li><strong>Identificador de publicidad (AD ID):</strong> lo usa Google AdMob, no un sistema de cuentas nuestro.</li>
+        </ul>
 
-        <h2>4. Seguridad de los Datos</h2>
-        <p>La seguridad de su terminal está respaldada por los propios protocolos nativos del sistema operativo móvil. Al no centralizar bases de datos con información de usuarios, el riesgo de filtraciones externas es nulo.</p>
+        <h2>4. Publicidad (Google AdMob)</h2>
+        <p>
+            Sleeper Baby es gratuita y muestra un <strong>banner publicitario</strong> en la parte inferior
+            mediante <strong>Google AdMob</strong> (Google LLC). Ese servicio puede tratar datos técnicos
+            y de publicidad según su propia política, entre ellos:
+        </p>
+        <ul>
+            <li>identificador de publicidad del dispositivo;</li>
+            <li>dirección IP, idioma, tipo de dispositivo y datos de interacción con el anuncio;</li>
+            <li>información necesaria para medir impresiones y limitar fraudes.</li>
+        </ul>
+        <p>
+            Xinove <strong>no vende</strong> tu información ni monta un perfil propio de usuario.
+            El tratamiento de los anuncios lo realiza Google. Puedes leer:
+        </p>
+        <ul>
+            <li><a href="https://policies.google.com/privacy" rel="noopener noreferrer">Política de privacidad de Google</a></li>
+            <li><a href="https://support.google.com/admob/answer/6128543" rel="noopener noreferrer">Cómo usa AdMob los datos</a></li>
+        </ul>
+        <p>
+            En Android puedes limitar el seguimiento publicitario en
+            <em>Ajustes → Privacidad / Google → Anuncios</em>
+            (el nombre exacto depende de la versión).
+        </p>
 
-        <h2>5. Cambios en esta Política</h2>
-        <p>Nos reservamos el derecho de actualizar esta política de privacidad si en el futuro se añaden nuevas funcionalidades técnicas en la aplicación. Cualquier cambio será publicado en esta misma URL con su correspondiente fecha de actualización.</p>
+        <h2>5. Informes de estabilidad</h2>
+        <p>
+            El sistema operativo o Google Play pueden enviarnos, de forma automática y anónima,
+            informes de cierre inesperado (modelo de dispositivo, versión de Android, traza del error)
+            para corregir fallos del reproductor. No incluyen el nombre ni el audio que estabas oyendo.
+        </p>
 
-        <h2>6. Contacto</h2>
-        <p>Si tiene cualquier duda o pregunta técnica sobre el comportamiento de la aplicación respecto a sus datos, puede ponerse en contacto a través de nuestro soporte en el repositorio oficial de desarrollo del proyecto.</p>
+        <h2>6. Niños y familias</h2>
+        <p>
+            El contenido es de cuna (nanas, ruidos, cuentos). El uso previsto es el de un adulto
+            que pone la app en marcha. No está dirigida a que un menor cree una cuenta ni
+            facilite datos personales. Si consideras que se ha recogido información de un menor
+            de 13 años a través de los anuncios de Google, escríbenos y colaboraremos para
+            gestionar la solicitud según las herramientas que ofrezca Google.
+        </p>
 
-        <a href="index.html" class="back-link">&larr; Volver al sitio principal</a>
-    </div>
+        <h2>7. Conservación y seguridad</h2>
+        <p>
+            No operamos una base de datos de usuarios de Sleeper Baby. Lo que vive en el teléfono
+            se borra con la app. La publicidad se rige por los plazos y medidas de Google.
+            Recomendamos mantener Android actualizado.
+        </p>
 
+        <h2>8. Tus derechos</h2>
+        <p>
+            Si el Reglamento General de Protección de Datos u otra norma similar te aplica,
+            puedes pedir acceso, rectificación o supresión de datos personales que existan.
+            En la práctica, los únicos datos personales que podría haber asociados al uso de
+            la app son los que trata Google por los anuncios, o los locales del teléfono,
+            que controlas tú. Para ejercer derechos sobre datos de AdMob, usa también los
+            mecanismos de Google.
+        </p>
+
+        <h2>9. Cambios</h2>
+        <p>
+            Si añadimos funciones que cambien esta política (por ejemplo, otra red de anuncios
+            o una cuenta opcional), actualizaremos esta misma página con una nueva fecha.
+        </p>
+
+        <h2>10. Contacto</h2>
+        <p>
+            Responsable: <strong>Xinove</strong>, respecto de la app Sleeper Baby.
+            Para dudas sobre privacidad puedes abrir un aviso en el repositorio del proyecto
+            o usar el correo de contacto de la ficha de Google Play:
+        </p>
+        <ul>
+            <li><a href="https://github.com/xinove/sleeper-baby/issues">github.com/xinove/sleeper-baby/issues</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.sleeperbaby.app">Ficha en Google Play</a></li>
+        </ul>
+
+        <p style="margin-top: 28px;">
+            <a class="btn" href="index.html">← Volver a Sleeper Baby</a>
+        </p>
+    </article>
+
+    <footer>
+        <div class="wrap footer-row">
+            <p>&copy; 2026 Sleeper Baby · Xinove. Todos los derechos reservados.</p>
+            <p>
+                <a href="index.html">Inicio</a>
+                <a href="privacy.html">Privacidad</a>
+            </p>
+        </div>
+    </footer>
 </body>
 </html>

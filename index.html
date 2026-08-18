@@ -3,210 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audioguía de Edimburgo - Descubre los secretos de la ciudad</title>
-    <style>
-        :root {
-            --primary: #d4af37; /* Oro viejo/dorado para el toque histórico */
-            --bg-dark: #1a1a1a;
-            --bg-light: #2d2d2d;
-            --text-light: #ffffff;
-            --text-muted: #a0a0a0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Hero Section */
-        header {
-            padding: 100px 20px;
-            text-align: center;
-            background: linear-gradient(rgba(26, 26, 26, 0.85), rgba(26, 26, 26, 1)), 
-                        url('hero-bg.jpg') no-repeat center center/cover;
-            border-bottom: 2px solid var(--primary);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: var(--text-light);
-        }
-
-        h1 span {
-            color: var(--primary);
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 40px auto;
-        }
-
-        /* Botones de descarga */
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            background-color: var(--primary);
-            color: var(--bg-dark);
-            padding: 15px 35px;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: transform 0.2s, background-color 0.2s;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            background-color: #f1c40f;
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-        }
-
-        /* Características */
-        .features {
-            padding: 80px 20px;
-        }
-
-        .features h2 {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        .features .section-desc {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 50px;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background-color: var(--bg-light);
-            padding: 35px;
-            border-radius: 10px;
-            border-top: 4px solid var(--primary);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            color: var(--text-light);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        /* Footer / Enlaces legales */
-        footer {
-            text-align: center;
-            padding: 50px 20px;
-            background-color: #111;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            border-top: 1px solid #222;
-        }
-
-        footer p {
-            margin-bottom: 15px;
-        }
-
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-            margin: 0 12px;
-            transition: color 0.2s;
-        }
-
-        footer a:hover {
-            color: #f1c40f;
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.3rem; }
-            .subtitle { font-size: 1.1rem; }
-            header { padding: 70px 20px; }
-        }
-    </style>
+    <title>Sleeper Baby — Nanas, ruidos suaves y cuentos para dormir</title>
+    <meta name="description" content="Sleeper Baby ayuda a tu bebé a conciliar el sueño con nanas, ruidos suaves, cuentos de cuna y una lucecita de noche. Sin cuentas ni GPS.">
+    <meta property="og:title" content="Sleeper Baby">
+    <meta property="og:description" content="La radio de cuna para que la noche se haga blanda: nanas, lluvia, cuentos y luz suave.">
+    <meta property="og:image" content="icon.png">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="sky" aria-hidden="true"></div>
+    <div class="stars" aria-hidden="true"></div>
+    <div class="stars-2" aria-hidden="true"></div>
 
-    <header>
-        <div class="container">
-            <h1>Edimburgo en tus oídos: <span>La Audioguía</span></h1>
-            <p class="subtitle">Recorre la Royal Mile, Castlehill y las inmediaciones del imponente Castillo guiado por las memorias de James Stuart, un escribano de 1745 dispuesto a revelarte la verdadera historia escocesa.</p>
-            
-            <div class="cta-buttons">
-                <a href="#" class="btn">Disponible próximamente en Google Play</a>
+    <header class="wrap">
+        <nav>
+            <a class="brand" href="index.html">
+                <img src="icon.png" alt="Icono de Sleeper Baby">
+                <strong>Sleeper Baby</strong>
+            </a>
+            <div class="nav-links">
+                <a href="#escuchar">Escuchar</a>
+                <a href="privacy.html">Privacidad</a>
+            </div>
+        </nav>
+
+        <div class="hero">
+            <div>
+                <p class="eyebrow">Radio de cuna</p>
+                <h1>La noche se hace <em>blanda</em></h1>
+                <p class="lead">
+                    Nanas, lluvia, océano, cuentos clásicos y una lucecita suave.
+                    Sleeper Baby acompaña a papás y bebés hasta que el silencio gane.
+                    Sin cuentas, sin GPS, con la pantalla apagada si quieres.
+                </p>
+                <div class="cta-row">
+                    <a class="btn" href="https://play.google.com/store/apps/details?id=com.sleeperbaby.app">
+                        Disponible en Google Play
+                    </a>
+                    <a class="btn btn-ghost" href="privacy.html">Política de privacidad</a>
+                </div>
+            </div>
+            <div class="hero-art">
+                <div class="moon" aria-hidden="true"></div>
+                <img class="hero-icon" src="icon.png" alt="Sleeper Baby: un bebé dormido sobre la luna">
             </div>
         </div>
     </header>
 
-    <section class="container features">
-        <h2>Una experiencia cultural diferente</h2>
-        <p class="section-desc">Diseñada minuciosamente para viajeros que buscan trascender las guías turísticas convencionales.</p>
-        
-        <div class="grid">
-            <div class="card">
-                <h3>Narrativa en Primera Persona</h3>
-                <p>Prescinde de las densas lecturas académicas. Un fidedigno personaje de la época relata los acontecimientos en tiempo real, sumergiéndote directamente en la atmósfera del siglo XVIII.</p>
+    <main>
+        <section class="wrap" id="escuchar">
+            <p class="section-kicker">Emisoras</p>
+            <h2>Todo lo que una cuna necesita oír</h2>
+            <p class="section-desc">Elige un canal y déjalo en bucle. El audio sigue sonando aunque bloquees el teléfono.</p>
+            <div class="grid">
+                <article class="card">
+                    <div class="emoji" aria-hidden="true">🌙</div>
+                    <h3>Nanas infantiles</h3>
+                    <p>Clásicas de siempre y un apartado moderno, suave, pensado para cuna. Brahms, Estrellita, Arrorró, Farolito, Camino…</p>
+                    <div class="pill-row">
+                        <span class="pill">Clásicas</span>
+                        <span class="pill">Modernas</span>
+                        <span class="pill">Mezclas</span>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="emoji" aria-hidden="true">🌧️</div>
+                    <h3>Ruidos suaves</h3>
+                    <p>Blanco, rosa, marrón, lluvia, océano y ventilador. Cubren los ruidos de casa y envuelven el dormitorio.</p>
+                    <div class="pill-row">
+                        <span class="pill">Lluvia</span>
+                        <span class="pill">Océano</span>
+                        <span class="pill">Ventilador</span>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="emoji" aria-hidden="true">✨</div>
+                    <h3>Frecuencia 432</h3>
+                    <p>Tonos cálidos y un drone de cuna. Para quien busca un zumbido limpio, sin melodía, que no distrae.</p>
+                    <div class="pill-row">
+                        <span class="pill">432 Hz</span>
+                        <span class="pill">528 Hz</span>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="emoji" aria-hidden="true">💓</div>
+                    <h3>Ritmos de cuna</h3>
+                    <p>Latido, mecedora, marimba y pulso nocturno. Compases lentos, originales, sin bandas sonoras de películas.</p>
+                </article>
+                <article class="card">
+                    <div class="emoji" aria-hidden="true">📖</div>
+                    <h3>Cuento del día</h3>
+                    <p>Cada jornada se desbloquea un clásico: Caperucita, los tres cerditos, Cenicienta… Narrados en audio, a tu ritmo.</p>
+                    <div class="pill-row">
+                        <span class="pill">1 cuento al día</span>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="emoji" aria-hidden="true">🪔</div>
+                    <h3>Luz de noche</h3>
+                    <p>Una lamparita en la pantalla: estrellas, animalitos o un brillo suave. Para acompañar sin encender la habitación.</p>
+                </article>
             </div>
-            <div class="card">
-                <h3>Rigor e Inmersión Histórica</h3>
-                <p>Descubre las crónicas documentadas sobre asedios medievales, los pasadizos de la monarquía estuarda y la intrahistoria de los sirvientes y soldados que alzaron la vieja ciudad de piedra.</p>
+        </section>
+
+        <section class="wrap">
+            <div class="night-panel">
+                <div>
+                    <p class="section-kicker">Pensada para padres</p>
+                    <h2>Simple, local y a oscuras</h2>
+                    <p class="section-desc" style="margin-bottom: 18px;">
+                        Sleeper Baby está hecha para quien arrulla, no para quien rellena formularios.
+                    </p>
+                    <ul class="checklist">
+                        <li>Sin registro ni contraseñas.</li>
+                        <li>Sin ubicación ni micrófono.</li>
+                        <li>Temporizador y volumen al alcance del pulgar.</li>
+                        <li>Velocidad de cuento de 1× a 2×, si hace falta acortar la espera.</li>
+                        <li>Un banner discreto abajo, para que la app pueda seguir siendo gratis.</li>
+                    </ul>
+                </div>
+                <div class="card" style="min-height: auto;">
+                    <h3>Google Play</h3>
+                    <p>Paquete <strong style="color: var(--peach);">com.sleeperbaby.app</strong>. Android, con notificación de reproducción para pausar desde la barra o los auriculares.</p>
+                    <div class="cta-row" style="margin-top: 22px;">
+                        <a class="btn" href="https://play.google.com/store/apps/details?id=com.sleeperbaby.app">Abrir ficha de Play</a>
+                    </div>
+                </div>
             </div>
-            <div class="card">
-                <h3>Exploración a tu propio ritmo</h3>
-                <p>Sin itinerarios encorsetados ni grupos ruidosos. La aplicación detecta tu posición y sincroniza las locuciones de manera orgánica para que disfrutes del paisaje con total autonomía.</p>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Audioguía Edimburgo. Todos los derechos reservados.</p>
+        <div class="wrap footer-row">
+            <p>&copy; 2026 Sleeper Baby · Xinove. Todos los derechos reservados.</p>
             <p>
-                <a href="privacy.html">Política de Privacidad</a> | 
-                <a href="#">Términos de Servicio</a> | 
-                <a href="#">Contacto</a>
+                <a href="privacy.html">Política de privacidad</a>
+                <a href="https://github.com/xinove/sleeper-baby">Código</a>
             </p>
         </div>
     </footer>
-
 </body>
 </html>
