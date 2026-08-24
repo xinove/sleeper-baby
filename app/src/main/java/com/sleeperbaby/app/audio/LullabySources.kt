@@ -216,6 +216,141 @@ object Melodies {
         ),
     )
 
+    val riffCuna = Melody(
+        bpm = 98f,
+        notes = listOf(
+            Note(60, 1f), Note(60, 0.5f), Note(63, 0.5f), Note(60, 1f),
+            Note(65, 1f), Note(63, 1f), Note(60, 2f),
+            Note(62, 1f), Note(60, 1f), Note(57, 1f), Note(55, 1f),
+            Note(57, 2f), Note(60, 2f),
+            Note(63, 1f), Note(65, 0.5f), Note(63, 0.5f), Note(60, 1f),
+            Note(57, 1f), Note(55, 1f), Note(57, 2f),
+        ),
+    )
+
+    val motorSuave = Melody(
+        bpm = 96f,
+        notes = listOf(
+            Note(57, 1f), Note(60, 1f), Note(62, 1f), Note(60, 1f),
+            Note(57, 1f), Note(55, 1f), Note(57, 2f),
+            Note(60, 0.5f), Note(62, 0.5f), Note(64, 1f), Note(62, 1f),
+            Note(60, 2f), Note(57, 2f),
+            Note(55, 1f), Note(57, 1f), Note(60, 1f), Note(64, 1f),
+            Note(62, 1f), Note(60, 1f), Note(57, 2f),
+        ),
+    )
+
+    val cieloElectrico = Melody(
+        bpm = 100f,
+        notes = listOf(
+            Note(67, 1f), Note(64, 0.5f), Note(67, 0.5f), Note(69, 1f),
+            Note(64, 1f), Note(60, 2f),
+            Note(62, 1f), Note(64, 1f), Note(67, 1f), Note(64, 1f),
+            Note(60, 2f), Note(57, 2f),
+            Note(67, 0.5f), Note(69, 0.5f), Note(67, 1f), Note(64, 1f),
+            Note(62, 1f), Note(59, 1f), Note(60, 2f),
+        ),
+    )
+
+    val puertoNoche = Melody(
+        bpm = 88f,
+        notes = listOf(
+            Note(55, 1f), Note(57, 1f), Note(60, 1.5f), Note(62, 0.5f),
+            Note(60, 1f), Note(57, 1f), Note(55, 2f),
+            Note(60, 1f), Note(64, 1f), Note(67, 1.5f), Note(65, 0.5f),
+            Note(64, 1f), Note(60, 1f), Note(57, 2f),
+            Note(62, 1f), Note(60, 1f), Note(57, 1f), Note(55, 1f),
+            Note(57, 2f), Note(60, 2f),
+        ),
+    )
+
+    val guardiaNoche = Melody(
+        bpm = 90f,
+        notes = listOf(
+            Note(62, 0.5f), Note(64, 0.5f), Note(67, 1f), Note(64, 1f),
+            Note(62, 1f), Note(59, 1f), Note(55, 2f),
+            Note(57, 0.5f), Note(59, 0.5f), Note(62, 1f), Note(64, 1f),
+            Note(62, 1f), Note(59, 1f), Note(57, 2f),
+            Note(64, 1f), Note(67, 0.5f), Note(64, 0.5f), Note(62, 1f),
+            Note(59, 1f), Note(55, 1f), Note(57, 2f),
+            Note(62, 0.5f), Note(64, 0.5f), Note(62, 1f), Note(59, 1f),
+            Note(57, 1f), Note(55, 1f), Note(57, 2f),
+        ),
+    )
+
+    val estribillo = Melody(
+        bpm = 96f,
+        notes = listOf(
+            Note(64, 0.5f), Note(67, 0.5f), Note(69, 1f), Note(72, 1f),
+            Note(69, 1f), Note(67, 2f),
+            Note(64, 1f), Note(62, 1f), Note(60, 1f), Note(62, 1f),
+            Note(64, 2f), Note(60, 2f),
+            Note(67, 0.5f), Note(69, 0.5f), Note(67, 0.5f), Note(64, 0.5f),
+            Note(62, 1f), Note(60, 1f), Note(64, 2f),
+        ),
+    )
+
+    val brillo = Melody(
+        bpm = 94f,
+        notes = listOf(
+            Note(72, 1f), Note(71, 0.5f), Note(69, 0.5f), Note(67, 1f),
+            Note(69, 1f), Note(72, 2f),
+            Note(67, 1f), Note(64, 1f), Note(62, 1f), Note(64, 1f),
+            Note(60, 2f), Note(67, 2f),
+            Note(69, 1f), Note(67, 1f), Note(64, 1f), Note(62, 1f),
+            Note(60, 2f),
+        ),
+    )
+
+    val nanaPop = Melody(
+        bpm = 98f,
+        notes = listOf(
+            Note(60, 0.5f), Note(64, 0.5f), Note(67, 1f), Note(69, 1f),
+            Note(67, 1f), Note(64, 1f), Note(60, 2f),
+            Note(62, 0.5f), Note(64, 0.5f), Note(65, 1f), Note(64, 1f),
+            Note(62, 1f), Note(60, 2f),
+            Note(67, 1f), Note(72, 1f), Note(69, 1f), Note(67, 1f),
+            Note(64, 1f), Note(62, 1f), Note(60, 2f),
+        ),
+    )
+
+    val nochePaz = Melody(
+        bpm = 72f,
+        notes = listOf(
+            Note(67, 2f), Note(64, 1f), Note(67, 2f), Note(64, 1f),
+            Note(62, 2f), Note(59, 1f), Note(62, 2f), Note(59, 1f),
+            Note(60, 2f), Note(60, 1f), Note(62, 1.5f), Note(64, 0.5f),
+            Note(62, 1f), Note(60, 2f),
+            Note(67, 2f), Note(67, 1f), Note(69, 2f), Note(69, 1f),
+            Note(67, 1.5f), Note(64, 0.5f), Note(60, 1f), Note(67, 2f),
+            Note(64, 1f), Note(62, 2f), Note(59, 1f), Note(60, 3f),
+        ),
+    )
+
+    val copos = Melody(
+        bpm = 80f,
+        notes = listOf(
+            Note(72, 1f), Note(67, 1f), Note(69, 1f), Note(67, 1f),
+            Note(64, 2f), Note(60, 2f),
+            Note(67, 1f), Note(69, 1f), Note(72, 1f), Note(76, 1f),
+            Note(72, 2f), Note(67, 2f),
+            Note(69, 1f), Note(67, 1f), Note(64, 1f), Note(62, 1f),
+            Note(60, 3f),
+        ),
+    )
+
+    val campanita = Melody(
+        bpm = 84f,
+        notes = listOf(
+            Note(67, 0.5f), Note(72, 0.5f), Note(67, 1f), Note(64, 1f),
+            Note(60, 2f),
+            Note(64, 0.5f), Note(67, 0.5f), Note(69, 1f), Note(67, 1f),
+            Note(64, 2f),
+            Note(72, 1f), Note(69, 1f), Note(67, 1f), Note(64, 1f),
+            Note(62, 1f), Note(64, 1f), Note(60, 2f),
+        ),
+    )
+
     val classic: List<Melody> = listOf(
         brahms, twinkle, frereJacques, arrorro, luna, osito, duerme, barquito, nube, cuna,
     )
@@ -224,7 +359,19 @@ object Melodies {
         farolito, orilla, camino, luces, nanaRadio,
     )
 
-    val named: List<Melody> = classic + modern
+    val rock: List<Melody> = listOf(
+        riffCuna, motorSuave, cieloElectrico, puertoNoche, guardiaNoche,
+    )
+
+    val pop: List<Melody> = listOf(
+        estribillo, brillo, nanaPop,
+    )
+
+    val christmas: List<Melody> = listOf(
+        nochePaz, copos, campanita,
+    )
+
+    val named: List<Melody> = classic + modern + rock + pop + christmas
 }
 
 class LullabyMelodySource(
@@ -328,7 +475,7 @@ class LullabyMixSource(
     private val remaining = songs.shuffled().toMutableList()
     private val player = LullabyMelodySource(
         sampleRate = sampleRate,
-        initial = remaining.removeFirst(),
+        initial = remaining.removeAt(0),
         loop = false,
         onCycle = ::playNext,
     )
@@ -341,7 +488,7 @@ class LullabyMixSource(
         if (remaining.isEmpty()) {
             remaining.addAll(songs.shuffled())
         }
-        player.setMelody(remaining.removeFirst())
+        player.setMelody(remaining.removeAt(0))
     }
 }
 

@@ -29,8 +29,8 @@ data class PlayerState(
     val isPlaying: Boolean = false,
     val isActive: Boolean = false,
     val kind: PlaybackKind = PlaybackKind.Radio,
-    val station: StationKind = StationKind.SoftNoise,
-    val channelId: String = Catalog.station(StationKind.SoftNoise).channels.first().id,
+    val station: StationKind = StationKind.Lullaby,
+    val channelId: String = Catalog.station(StationKind.Lullaby).channels.first().id,
     val storyId: StoryId? = null,
     val volume: Float = 0.7f,
     val playbackSpeed: Float = 1f,
@@ -54,12 +54,12 @@ object SleepRadioController {
         startRadio(channelId)
     }
 
-    fun playStory(story: Story) {
+    fun playStory(story: Story, nodeId: String? = null) {
         engine.stop()
         engine.setDuck(1f)
         StoryTtsController.setVolume(mutableState.value.volume)
         StoryTtsController.setSpeed(mutableState.value.playbackSpeed)
-        StoryTtsController.play(story)
+        StoryTtsController.play(story, nodeId)
         mutableState.update {
             it.copy(
                 isPlaying = true,

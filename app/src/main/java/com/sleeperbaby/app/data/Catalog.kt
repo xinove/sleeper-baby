@@ -22,7 +22,6 @@ import com.sleeperbaby.app.audio.WhiteNoiseSource
 enum class StationKind {
     SoftNoise,
     Lullaby,
-    Frequency,
     CradleRhythm,
 }
 
@@ -44,12 +43,48 @@ data class Station(
     val channels: List<Channel>,
 )
 
+enum class LullabyShelf(
+    val title: String,
+    val mixChannelId: String,
+    val section: String?,
+) {
+    All("Todas", "lullaby_mix", null),
+    Classic("Clásicas", "lullaby_mix_classic", "Clásicas"),
+    Modern("Modernas", "lullaby_mix_modern", "Modernas"),
+    Rock("Rock", "lullaby_mix_rock", "Rock"),
+    Pop("Pop", "lullaby_mix_pop", "Pop"),
+    Christmas("Navideñas", "lullaby_mix_xmas", "Navideñas"),
+}
+
+fun Channel.lullabyShelf(): LullabyShelf {
+    if (id == "lullaby_infinite") return LullabyShelf.All
+    LullabyShelf.entries.firstOrNull { it.mixChannelId == id }?.let { return it }
+    return LullabyShelf.entries.firstOrNull { shelf ->
+        shelf.section != null && shelf.section == section
+    } ?: LullabyShelf.All
+}
+
+fun Station.lullabyMix(shelf: LullabyShelf): Channel? =
+    channels.firstOrNull { it.id == shelf.mixChannelId }
+
+fun Station.lullabyInfinite(): Channel? =
+    channels.firstOrNull { it.id == "lullaby_infinite" }
+
+fun Station.lullabySongs(shelf: LullabyShelf): List<Channel> {
+    val section = shelf.section ?: return emptyList()
+    return channels.filter { channel ->
+        channel.section == section &&
+            channel.id != shelf.mixChannelId &&
+            channel.id != "lullaby_infinite"
+    }
+}
+
 object Catalog {
-    val stations: List<Station> = listOf(
+    private val allStations: List<Station> = listOf(
         Station(
             kind = StationKind.SoftNoise,
             title = "Ruidos suaves",
-            subtitle = "Blanco, rosa, lluvia y mar en bucle",
+            subtitle = "Blanco, lluvia, mar y tonos 432",
             leadingArt = R.drawable.ic_station_noise,
             trailingArt = R.drawable.ill_koala,
             channels = listOf(
@@ -65,16 +100,28 @@ object Catalog {
                 Channel("noise_fan", "Ventilador", "Zumbido constante", R.drawable.ic_channel_fan) { sampleRate ->
                     FanNoiseSource(sampleRate)
                 },
+                Channel("freq_432", "Tono (432)", "Tono puro y continuo", R.drawable.ic_channel_432) { sampleRate ->
+                    WarmToneSource(sampleRate, 432.0, warmth = 0.12f)
+                },
+                Channel("freq_432_warm", "Cálida (432)", "Con octava grave", R.drawable.ic_channel_432_warm) { sampleRate ->
+                    WarmToneSource(sampleRate, 432.0, warmth = 0.35f)
+                },
+                Channel("freq_528", "Tono (528)", "Otra frecuencia suave", R.drawable.ic_channel_528) { sampleRate ->
+                    WarmToneSource(sampleRate, 528.0, warmth = 0.18f)
+                },
+                Channel("freq_pad", "Drone (432)", "Almohadilla lenta", R.drawable.ic_channel_pad) { sampleRate ->
+                    FrequencyPadSource(sampleRate)
+                },
             ),
         ),
         Station(
             kind = StationKind.Lullaby,
             title = "Nanas infantiles",
-            subtitle = "Clásicas de cuna y modernas suaves",
+            subtitle = "Clásicas, modernas, rock, pop y navideñas",
             leadingArt = R.drawable.ic_station_lullaby,
             trailingArt = R.drawable.ill_fox,
             channels = listOf(
-                Channel("lullaby_mix", "Todas", "Mezcla de clásicas y modernas", R.drawable.ic_channel_mix, "Mezclas") { sampleRate ->
+                Channel("lullaby_mix", "Mezcla de todas", "Mezcla de todos los estilos", R.drawable.ic_channel_mix, "Mezclas") { sampleRate ->
                     LullabyMixSource(sampleRate)
                 },
                 Channel("lullaby_mix_classic", "Mix clásicas", "Solo nanas de siempre", R.drawable.ic_channel_brahms, "Mezclas") { sampleRate ->
@@ -82,6 +129,15 @@ object Catalog {
                 },
                 Channel("lullaby_mix_modern", "Mix modernas", "Solo nanas de ahora", R.drawable.ic_channel_mix, "Mezclas") { sampleRate ->
                     LullabyMixSource(sampleRate, Melodies.modern)
+                },
+                Channel("lullaby_mix_rock", "Mix rock", "Riffs suaves de cuna", R.drawable.ic_channel_pulse, "Mezclas") { sampleRate ->
+                    LullabyMixSource(sampleRate, Melodies.rock)
+                },
+                Channel("lullaby_mix_pop", "Mix pop", "Estribillos para dormir", R.drawable.ic_channel_mix, "Mezclas") { sampleRate ->
+                    LullabyMixSource(sampleRate, Melodies.pop)
+                },
+                Channel("lullaby_mix_xmas", "Mix navideñas", "Noche en paz y copos", R.drawable.ic_channel_twinkle, "Mezclas") { sampleRate ->
+                    LullabyMixSource(sampleRate, Melodies.christmas)
                 },
                 Channel("lullaby_brahms", "Brahms", "Canción de cuna clásica", R.drawable.ic_channel_brahms, "Clásicas") { sampleRate ->
                     LullabyMelodySource(sampleRate, Melodies.brahms)
@@ -131,26 +187,38 @@ object Catalog {
                 Channel("lullaby_radio", "Nana de radio", "Pop suave de buenas noches", R.drawable.ic_channel_pad, "Modernas") { sampleRate ->
                     LullabyMelodySource(sampleRate, Melodies.nanaRadio)
                 },
-            ),
-        ),
-        Station(
-            kind = StationKind.Frequency,
-            title = "Frecuencia 432",
-            subtitle = "La que suele recordarse como 432 Hz",
-            leadingArt = R.drawable.ic_station_frequency,
-            trailingArt = R.drawable.ill_sloth,
-            channels = listOf(
-                Channel("freq_432", "432 Hz", "Tono puro y continuo", R.drawable.ic_channel_432) { sampleRate ->
-                    WarmToneSource(sampleRate, 432.0, warmth = 0.12f)
+                Channel("lullaby_riff", "Riff de cuna", "Rock bajito, sin gritos", R.drawable.ic_channel_pulse, "Rock") { sampleRate ->
+                    LullabyMelodySource(sampleRate, Melodies.riffCuna)
                 },
-                Channel("freq_432_warm", "432 cálida", "Con octava grave", R.drawable.ic_channel_432_warm) { sampleRate ->
-                    WarmToneSource(sampleRate, 432.0, warmth = 0.35f)
+                Channel("lullaby_motor", "Motor suave", "Carretera lenta a la cama", R.drawable.ic_channel_heart, "Rock") { sampleRate ->
+                    LullabyMelodySource(sampleRate, Melodies.motorSuave)
                 },
-                Channel("freq_528", "528 Hz", "Otra frecuencia suave", R.drawable.ic_channel_528) { sampleRate ->
-                    WarmToneSource(sampleRate, 528.0, warmth = 0.18f)
+                Channel("lullaby_cielo", "Cielo eléctrico", "Rock de estrellas", R.drawable.ic_channel_infinite, "Rock") { sampleRate ->
+                    LullabyMelodySource(sampleRate, Melodies.cieloElectrico)
                 },
-                Channel("freq_pad", "Drone de cuna", "Almohadilla lenta", R.drawable.ic_channel_pad) { sampleRate ->
-                    FrequencyPadSource(sampleRate)
+                Channel("lullaby_puerto", "Puerto de noche", "Rock de muelle, para arrullar", R.drawable.ic_channel_ocean, "Rock") { sampleRate ->
+                    LullabyMelodySource(sampleRate, Melodies.puertoNoche)
+                },
+                Channel("lullaby_guardia", "Guardia de noche", "Balada de puerto, ritmo de cuna", R.drawable.ic_channel_ocean, "Rock") { sampleRate ->
+                    LullabyMelodySource(sampleRate, Melodies.guardiaNoche)
+                },
+                Channel("lullaby_estribillo", "Estribillo", "La parte que se pega, suave", R.drawable.ic_channel_mix, "Pop") { sampleRate ->
+                    LullabyMelodySource(sampleRate, Melodies.estribillo)
+                },
+                Channel("lullaby_brillo", "Brillo", "Pop de buenas noches", R.drawable.ic_channel_twinkle, "Pop") { sampleRate ->
+                    LullabyMelodySource(sampleRate, Melodies.brillo)
+                },
+                Channel("lullaby_nanapop", "Nana pop", "Verso y estribillo de cuna", R.drawable.ic_channel_pad, "Pop") { sampleRate ->
+                    LullabyMelodySource(sampleRate, Melodies.nanaPop)
+                },
+                Channel("lullaby_nochepaz", "Noche en paz", "Villancico clásico, muy despacio", R.drawable.ic_channel_twinkle, "Navideñas") { sampleRate ->
+                    LullabyMelodySource(sampleRate, Melodies.nochePaz)
+                },
+                Channel("lullaby_copos", "Copos", "Nieve cayendo en la cuna", R.drawable.ic_channel_white, "Navideñas") { sampleRate ->
+                    LullabyMelodySource(sampleRate, Melodies.copos)
+                },
+                Channel("lullaby_campanita", "Campanita", "Campanas lejanas", R.drawable.ic_channel_arrorro, "Navideñas") { sampleRate ->
+                    LullabyMelodySource(sampleRate, Melodies.campanita)
                 },
             ),
         ),
@@ -177,6 +245,12 @@ object Catalog {
         ),
     )
 
+    val stations: List<Station> = listOf(
+        allStations.first { it.kind == StationKind.Lullaby },
+        allStations.first { it.kind == StationKind.SoftNoise },
+        allStations.first { it.kind == StationKind.CradleRhythm },
+    )
+
     fun station(kind: StationKind): Station =
         stations.first { it.kind == kind }
 
@@ -194,6 +268,5 @@ object Catalog {
 fun StationKind.title(): String = when (this) {
     StationKind.SoftNoise -> "Ruidos suaves"
     StationKind.Lullaby -> "Nanas infantiles"
-    StationKind.Frequency -> "Frecuencia 432"
     StationKind.CradleRhythm -> "Ritmos de cuna"
 }

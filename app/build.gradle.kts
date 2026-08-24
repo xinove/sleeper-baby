@@ -12,8 +12,8 @@ android {
         applicationId = "com.sleeperbaby.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.0.1"
 
         manifestPlaceholders["admobAppId"] = "ca-app-pub-1500150166852996~1158458948"
     }
@@ -23,11 +23,16 @@ android {
             manifestPlaceholders["admobAppId"] = "ca-app-pub-3940256099942544~3347511713"
         }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+            ndk {
+                // Empaqueta símbolos nativos en el AAB para ANR y crashes en Play Console.
+                debugSymbolLevel = "SYMBOL_TABLE"
+            }
             manifestPlaceholders["admobAppId"] = "ca-app-pub-1500150166852996~1158458948"
         }
     }
@@ -45,6 +50,11 @@ android {
         compose = true
         buildConfig = true
     }
+
+    lint {
+        // Android Studio writes unescaped Windows paths in local.properties.
+        disable += "PropertyEscape"
+    }
 }
 
 dependencies {
@@ -55,6 +65,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.activity:activity-compose:1.9.3")
+    implementation("androidx.fragment:fragment-ktx:1.8.8")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
@@ -63,4 +74,22 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
     implementation("com.google.android.gms:play-services-ads:25.4.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
+}
+
+tasks.register<Zip>("packageReleaseNativeDebugSymbols") {
+    val aab = layout.buildDirectory.file("outputs/bundle/release/app-release.aab")
+    inputs.file(aab)
+    archiveFileName.set("native-debug-symbols.zip")
+    destinationDirectory.set(layout.buildDirectory.dir("outputs/native-debug-symbols/release"))
+    from({ zipTree(aab) }) {
+        include("base/lib/**/*.so")
+        eachFile {
+            path = relativePath.pathString.replace('\\', '/').removePrefix("base/lib/")
+        }
+        includeEmptyDirs = false
+    }
+}
+
+tasks.matching { it.name == "bundleRelease" }.configureEach {
+    finalizedBy("packageReleaseNativeDebugSymbols")
 }

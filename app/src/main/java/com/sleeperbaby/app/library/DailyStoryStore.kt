@@ -7,23 +7,28 @@ import java.time.temporal.ChronoUnit
 class DailyStoryStore(context: Context) {
     private val prefs = context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
-    fun today(): Story = StoryCatalog.stories[todayIndex()]
+    fun todayTale(): Story = StoryCatalog.taleOfTheDay(daysSinceFirstOpen())
 
-    fun todayIndex(): Int {
+    fun todayAdventure(): Story = StoryCatalog.adventureOfTheDay(daysSinceFirstOpen())
+
+    fun todayStories(): List<Story> = listOf(todayTale(), todayAdventure())
+
+    fun daysSinceFirstOpen(): Int {
         ensureFirstOpen()
         val first = LocalDate.parse(prefs.getString(KEY_FIRST_OPEN, LocalDate.now().toString())!!)
-        val days = ChronoUnit.DAYS.between(first, LocalDate.now()).toInt().coerceAtLeast(0)
-        return days.mod(StoryCatalog.stories.size)
+        return ChronoUnit.DAYS.between(first, LocalDate.now()).toInt().coerceAtLeast(0)
     }
 
-    fun unlockedCount(): Int = 1
+    fun unlockedCount(): Int = 2
 
-    fun isUnlocked(story: Story): Boolean = story.id == today().id
+    fun isUnlocked(story: Story): Boolean = todayStories().any { it.id == story.id }
 
     fun daysUntilUnlock(story: Story): Int {
-        val index = StoryCatalog.stories.indexOfFirst { it.id == story.id }
+        val pool = if (story.isAdventure()) StoryCatalog.adventures else StoryCatalog.tales
+        val index = pool.indexOfFirst { it.id == story.id }
         if (index < 0) return 0
-        return (index - todayIndex()).mod(StoryCatalog.stories.size)
+        val today = daysSinceFirstOpen().mod(pool.size)
+        return (index - today).mod(pool.size)
     }
 
     fun shouldShowPopup(): Boolean {

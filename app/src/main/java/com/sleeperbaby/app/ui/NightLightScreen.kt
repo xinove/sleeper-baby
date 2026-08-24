@@ -30,7 +30,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
@@ -270,11 +269,11 @@ private fun NightLightControls(light: NightLightState) {
             .fillMaxWidth()
             .navigationBarsPadding()
             .padding(16.dp)
-            .clip(RoundedCornerShape(24.dp))
+            .clip(SleeperCardShape)
             .background(
                 Brush.verticalGradient(listOf(Color(0xCC2B4D78), Color(0xE61A3358))),
             )
-            .border(1.dp, WarmGold.copy(alpha = 0.28f), RoundedCornerShape(24.dp))
+            .border(1.dp, WarmGold.copy(alpha = 0.28f), SleeperCardShape)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,
@@ -295,16 +294,10 @@ private fun NightLightControls(light: NightLightState) {
         )
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             listOf(NightLightMode.WarmLamp, NightLightMode.Animals, NightLightMode.Stars).forEach { mode ->
-                val selected = light.mode == mode
-                Text(
-                    text = mode.label(),
-                    color = if (selected) NightNavy else Mist,
-                    style = MaterialTheme.typography.labelLarge,
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(50))
-                        .background(if (selected) WarmGold else Color.White.copy(alpha = 0.08f))
-                        .clickable { NightLightController.setMode(mode) }
-                        .padding(horizontal = 12.dp, vertical = 8.dp),
+                SleeperChip(
+                    label = mode.label(),
+                    selected = light.mode == mode,
+                    onClick = { NightLightController.setMode(mode) },
                 )
             }
         }

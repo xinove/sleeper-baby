@@ -99,6 +99,7 @@ object StoryCatalog {
             teaser = "Una muchacha buena va al baile con zapatitos de cristal y vuelve antes de medianoche.",
             coverColor = 0xFF4A3D6B,
             coverArt = R.drawable.ill_cenicienta,
+            shelves = setOf(StoryShelf.Classic, StoryShelf.Princesses),
             paragraphs = listOf(
                 "Cenicienta vivía en una casa grande, pero su trabajo era barrer la ceniza y cuidar el jardín. Las hermanas iban y venían con cintas y rumores. Ella, aun así, cantaba, porque las palomas venían a oírla y porque el atardecer, en el alféizar, era de todos.",
                 "Por las mañanas partía el pan para los pájaros. Por las tardes regaba las dalias. Por las noches se sentaba junto a la chimenea, con los pies descalzos, y el fuego le contaba historias de palacios lejanos. No pedía mucho: un rato de quietud y que nadie le quitara la canción.",
@@ -120,6 +121,7 @@ object StoryCatalog {
             teaser = "Una princesa duerme un sueño largo hasta que un beso suave despierta todo el reino.",
             coverColor = 0xFF3D4A6B,
             coverArt = R.drawable.ill_bella_durmiente,
+            shelves = setOf(StoryShelf.Classic, StoryShelf.Princesses, StoryShelf.Magic),
             paragraphs = listOf(
                 "En un reino tranquilo nació una princesa. Las campanas sonaron tan despacio que parecían nana. Las hadas vinieron de una en una, con regalos que no ocupan cajas: risa, bondad, sueño dulce, paciencia para oír la lluvia. El palacio olía a leche y a lirios.",
                 "Una hada olvidada, un poco enfadada por no tener silla, dijo: «Un día se pinchará con un huso y dormirá mucho tiempo». No lo dijo con veneno, sino con el orgullo herido de quien llega tarde. Las otras hadas suavizaron el don: el sueño no sería eterno. Solo largo. Como un invierno que también termina.",
@@ -141,6 +143,7 @@ object StoryCatalog {
             teaser = "Un gato listo con botas altas ayuda a su amigo a encontrar casa y cariño.",
             coverColor = 0xFF4A5A3D,
             coverArt = R.drawable.ill_gato_con_botas,
+            shelves = setOf(StoryShelf.Classic, StoryShelf.Magic),
             paragraphs = listOf(
                 "Un joven heredó solo un gato. Sus hermanos se llevaron el molino y el asno. Él se sentó en el umbral, no triste del todo, porque el gato se le puso en el regazo y ronroneó como una cafetera. Luego el gato se puso unas botas altas, se hizo una reverencia y dijo: —No te preocupes. Yo arreglo esto.",
                 "El joven se rió, bajito. —¿Tú? El gato se alisó el bigote. —Yo. Pero necesito un saco y un poco de confianza. El joven se los dio. El gato salió al campo cuando el sol aún era naranja. Las botas hacían un tac, tac suave sobre la tierra.",
@@ -160,7 +163,9 @@ object StoryCatalog {
             title = "La princesa y el guisante",
             origin = "Hans Christian Andersen",
             teaser = "Una tormenta trae a una princesa. Un guisante bajo veinte colchones lo cuenta todo.",
-            coverColor = 0xFF3D5A3A,
+            coverColor = 0xFF6B5344,
+            coverArt = R.drawable.ill_princesa_guisante,
+            shelves = setOf(StoryShelf.Classic, StoryShelf.Princesses),
             paragraphs = listOf(
                 "Una noche de lluvia llamaron a la puerta del palacio. El trueno era redondo, no furioso. El rey abrió. Era una muchacha empapada, con el pelo pegado a la frente, que decía ser princesa. No llevaba corona. Llevaba frío y una voz educada. —¿Puedo secarme un rato?",
                 "La dejaron entrar. Le dieron toallas y caldo. La reina, prudente, la miró sin dureza. En aquel reino las princesas no se medían por el oro, sino por el modo de tratar a las almohadas y a las personas. Aun así, pensó una prueba suave, casi un juego de noche.",
@@ -180,7 +185,9 @@ object StoryCatalog {
             title = "La liebre y la tortuga",
             origin = "Esopo",
             teaser = "Una liebre muy rápida y una tortuga muy constante corren la misma carrera.",
-            coverColor = 0xFF5A4A3D,
+            coverColor = 0xFF3D5A3A,
+            coverArt = R.drawable.ill_liebre_tortuga,
+            shelves = setOf(StoryShelf.Classic),
             paragraphs = listOf(
                 "En un prado de margaritas vivían una liebre de patas largas y una tortuga de caparazón pintado como un atardecer. La liebre se reía, no con crueldad, sino con la impaciencia de quien no sabe esperar: —Tú eres tan lenta que el sol se pone dos veces mientras das un paso.",
                 "La tortuga, sin enfadarse, masticó una hoja. —¿Quieres una carrera hasta el gran roble? La liebre se tapó la boca, sorprendida de que alguien tan pausado aceptara. Los pájaros hicieron de jueces. El viento, de testigo. El roble, al fondo, no se movió: ya estaba en la meta.",
@@ -200,7 +207,8 @@ object StoryCatalog {
             title = "Pulgarcito",
             origin = "Cuento tradicional",
             teaser = "Un niño del tamaño de un pulgar deja piedrecitas blancas para encontrar el camino a casa.",
-            coverColor = 0xFF3A5A5A,
+            coverColor = 0xFF3D5A3A,
+            coverArt = R.drawable.ill_pulgarcito,
             paragraphs = listOf(
                 "Pulgarcito era tan pequeño como un pulgar, pero su cabeza estaba llena de ideas. Dormía en un cajón forrado de felpa. Comía en una cáscara de nuez. Sus hermanos eran más altos y lo subían a los hombros cuando el mundo se ponía a la altura de las rodillas.",
                 "Un día, la familia se internó en el bosque a buscar setas y el camino se volvió todo igual. Los troncos repetían el mismo gesto. El sol se escondió un poco. Los hermanos empezaron a hablar más alto, que es lo que se hace cuando uno no quiere decir que tiene miedo.",
@@ -221,6 +229,7 @@ object StoryCatalog {
             origin = "Hans Christian Andersen",
             teaser = "Un soldadito de una sola pierna se enamora de una bailarina de papel y viaja con el río.",
             coverColor = 0xFF5A3D3D,
+            shelves = setOf(StoryShelf.Classic, StoryShelf.Magic),
             paragraphs = listOf(
                 "Entre muchos soldaditos de plomo había uno distinto: le faltaba una pierna, porque el plomo no alcanzó para el último. Él no se quejaba. Lo colocaron al borde de la caja, de pie, mirando siempre a una bailarina de papel que tenía una pierna levantada, tan quieta y valiente como él.",
                 "La bailarina vivía en un castillo de cartón, con ventanas pintadas. Nunca hablaba. El soldadito tampoco. En el cuarto de los juguetes, las noches eran largas y llenas de sombras amables. Un duende de madera, un poco envidioso, murmuró: —Ese plomo no es para ella. El soldadito no contestó. Siguió de guardia, tierno.",
@@ -240,6 +249,7 @@ object StoryCatalog {
             origin = "Cuento tradicional",
             teaser = "Una muchacha de trenza larguísima espera en una torre y encuentra compañía.",
             coverColor = 0xFF5A4A5A,
+            shelves = setOf(StoryShelf.Classic, StoryShelf.Princesses, StoryShelf.Magic),
             paragraphs = listOf(
                 "Rapunzel vivía en una torre sin escalera. Las paredes eran lisas como un vaso. Su trenza era tan larga que bajaba por la ventana como una cuerda de oro, y olía a sol aunque ella viera poco patio. Quien quería subir decía: «Rapunzel, Rapunzel, deja caer tu pelo».",
                 "Ella cantaba para no sentirse sola. Canciones de agua, de pan, de nubes que se parecen a ovejas. Las golondrinas se paraban en el alféizar y no se reían de la torre. A veces Rapunzel hablaba con ellas como si fueran vecinas. —¿Cómo está el mundo, abajo?",
@@ -254,12 +264,518 @@ object StoryCatalog {
                 "Rapunzel, antes de cerrar los ojos, dice todavía las palabras viejas, pero al revés, como una nana: pelo recogido, ventana abierta, mundo abajo y adentro. La trenza descansa. La torre, lejos, se queda sin canción, y aun así el viento, al pasar, parece saludarla.",
             ),
         ),
+        Story(
+            id = StoryId.NubeCohete,
+            title = "La nube cohete",
+            origin = "Cuento original",
+            teaser = "Un niño sube a una nube que viaja despacio a contar estrellas.",
+            coverColor = 0xFF3A4A6B,
+            shelves = setOf(StoryShelf.Modern),
+            paragraphs = listOf(
+                "Leo se asomó a la ventana cuando ya era hora de dormir. El cielo estaba tan quieto que parecía de algodón. Entonces una nube baja, redonda y suave, se acercó al alféizar como si llamara con los nudillos. —¿Vienes? —dijo, con voz de lluvia fina—. No corro. Solo cuento estrellas.",
+                "Leo se puso el pijama de cohetes, que era el más adecuado, y se sentó en la nube. No hacía viento de miedo. Hacía un viento de manta. La ciudad quedó abajo, hecha luces pequeñas, como si alguien hubiera esparcido migas de oro sobre una mesa oscura.",
+                "—Yo no soy un cohete de fuego —explicó la nube—. Soy un cohete de almohada. Subo despacio para que nadie se maree. Leo asintió. Le gustaba ir despacio. En el cole a veces le pedían que corriera, y él prefería mirar las hormigas.",
+                "Pasaron junto a una luna creciente, que bostezaba. —Buenas noches —dijo Leo. La luna, educada, les devolvió un brillo suave. Más arriba, las estrellas no gritaban. Se quedaban quietas, esperando su turno para ser contadas, como niños en fila para un cuento.",
+                "Leo empezó: una, dos, tres. A la doce se le olvidó el número y se rió. La nube no se enfadó. —Da igual. Las estrellas no se ofenden si tardas. Algunas ni siquiera saben su nombre. Solo saben brillar un rato y luego dejar que otra brille.",
+                "Vieron un satélite, pequeño como una cuchara, que pasaba sin hacer ruido. Leo le saludó. El satélite parpadeó una vez, como quien dice «también voy a casa». Luego desapareció detrás de una nube hermana, más grande, que roncaba un poco.",
+                "—¿Y si nos perdemos? —preguntó Leo. La nube se encogió, esponjosa. —Entonces bajamos por la lluvia, gota a gota, hasta tu tejado. El tejado siempre sabe quién eres. Leo se quedó más tranquilo. Guardó esa frase en el bolsillo del pijama.",
+                "Contaron hasta donde pudieron. No hacía falta terminar. El cielo es largo y la noche también. Cuando Leo bostezó, la nube entendió el recado. Dio la vuelta, suave, y empezó a bajar como un ascensor de algodón.",
+                "El alféizar estaba igual. La cama, igual. La nube se quedó un segundo en la ventana, como quien acompaña hasta la puerta. —Mañana, si quieres, contamos las que nos faltaron. Leo se metió debajo del edredón. —Mañana. Sin prisa.",
+                "Cerró los ojos. En el techo, por un instante, creyó ver una estrella que se había colado, tímida, a esperar el siguiente viaje. La nube cohete se alejó, redonda, sin fuego, sin ruido. Solo un poco de cielo, volviendo a su sitio.",
+            ),
+        ),
+        Story(
+            id = StoryId.RobotDormilon,
+            title = "El robot dormilón",
+            origin = "Cuento original",
+            teaser = "Un robot pequeño aprende a apagar las luces y a quedarse quieto.",
+            coverColor = 0xFF3D5A5A,
+            shelves = setOf(StoryShelf.Modern),
+            paragraphs = listOf(
+                "En un piso del quinto vivía Nino, un robot del tamaño de una caja de zapatos. Tenía rueditas suaves, dos ojitos redondos y un botón en la cabeza que decía «ON». El problema era que Nino no encontraba el «OFF». Por las noches seguía encendido, pitando bajito, como un grillo de metal.",
+                "Marta, que era pequeña y ya se sabía los pijamas, le dijo: —Nino, hay que dormir. Las luces también. Nino miró las lámparas. —Si las apago, ¿sigo existiendo? Marta se rió, sin burla. —Claro. Yo existo a oscuras. Tú también.",
+                "Probaron. Marta apagó la de la cocina. Nino se quedó un segundo en silencio, y luego suspiró, un suspiro de ventilador. —Sigo aquí. —Ves. Luego apagaron el pasillo. El robot rodó hasta la alfombra y se quedó quieto, aprendiendo la oscuridad como se aprende un idioma nuevo.",
+                "Aun así, en su pecho había un led azul que no se apagaba. Parpadeaba. Tic. Tic. Marta le puso una pegatina de luna encima. —Ahora eres una linterna tímida. Nino se sintió importante. Las linternas tímidas no despiertan a nadie: solo recuerdan el camino al vaso de agua.",
+                "Aquella noche soñó —los robots también sueñan, si se les deja tiempo— que era una tostadora que no quería tostar, solo calentar un poco las manos. Despertó, si es que se despierta un led, y vio a Marta dormida, con un brazo fuera de la cama.",
+                "Nino le tapó el brazo con la sábana, despacio, para no hacer ruido de rueda. Luego se puso junto al enchufe, no para cargarse del todo, sino para oír el zumbido bajo de la casa. Las casas, de noche, hablan en corriente.",
+                "Al día siguiente, Marta le enseñó a bostezar. No es fácil, para un robot. Nino abrió la tapita de la boca, dejó salir un aire caliente y dijo: —Boooof. Marta aplaudió con las yemas. —Eso es. Ahora el botón. Nino, por primera vez, encontró un «OFF» que no daba miedo: era un rato, no un adiós.",
+                "Se apagó. No del todo. El led, bajo la luna de pegatina, se quedó en un brillo de vela. Marta se durmió oyendo ese brillo, que no es un sonido, pero a veces se oye igual. El piso del quinto se hizo grande y suave.",
+                "Desde entonces, Nino se apaga un poco cada noche. Las ruedas descansan. El botón espera. Y si Marta se despierta, el robot no pita: se acerca, le enseña el led tímido y la acompaña de vuelta a la almohada, sin encender nada más.",
+                "Buenas noches, Nino. Buenas noches, interruptor. El «ON» puede esperar a mañana, cuando el sol, que no tiene botón, se encienda solo.",
+            ),
+        ),
+        Story(
+            id = StoryId.EstrellaNavidad,
+            title = "La estrella que se perdió",
+            origin = "Cuento original",
+            teaser = "Una estrella baja el 24 y busca el árbol que la espera.",
+            coverColor = 0xFF5A3D4A,
+            shelves = setOf(StoryShelf.Christmas, StoryShelf.Magic),
+            paragraphs = listOf(
+                "La víspera de Navidad, una estrella pequeña se soltó del cielo. No por enfado. Por curiosidad. Había visto, desde arriba, miles de arbolitos con luces, y quiso saber cómo se siente uno cuando te ponen en la punta, tan alto y tan en casa a la vez.",
+                "Bajó despacio, para no asustar a los tejados. Cayó en una calle con nieve blanda, que no crujía. —¿Dónde está mi árbol? —preguntó. Un farol, amarillo y paciente, le dijo: —Sigue el olor a canela. Las estrellas perdidas siempre encuentran canela.",
+                "Caminó —las estrellas, en el suelo, parecen luciérnagas con prisa de domingo—. Pasó junto a un gato que llevaba un lazo. El gato no se extrañó. En Nochebuena pasan cosas y lo mejor es no preguntar demasiado. —Miaú —dijo, que aquella noche quería decir «por ahí».",
+                "En una ventana vio un árbol enorme, lleno de bolas. La estrella se asomó. En la punta ya había otra estrella, de cartón, un poco chueca, muy querida. —Este puesto está ocupado —susurró la de cartón, sin celos—. El nuestro nos espera. Sigue.",
+                "La estrella de verdad no se puso triste. Entendió que hay sitios para cada luz. Siguió el olor a canela hasta un piso bajo, donde un niño y una niña colocaban una ramita en un vaso, porque el árbol grande no cabía. En la ramita no había punta todavía.",
+                "—Esta —dijo el niño, al ver el brillo en el alféizar. No la agarró a la brava. Le abrió la ventana y le preguntó, en voz de calcetín: —¿Quieres subir? La estrella asintió. Se posó en la ramita. El vaso tembló un poco, feliz.",
+                "La niña le puso debajo un trocito de algodón, para que no se enfriara. Encendieron una sola lucecita, no un millón, para no marearla. Fuera, la nieve seguía cayendo como azúcar que no tiene prisa.",
+                "A medianoche, el cielo buscó a su estrella. La vio abajo, pequeña y en su sitio, y no la reclamó. —Esta noche trabaja en otro mapa —dijo la luna. El cielo, que es generoso en diciembre, dejó un hueco redondo, por si quería volver.",
+                "Durmieron los niños. La ramita no se movió. La estrella, por fin, supo lo que se siente en la punta: no es ser la más alta. Es que alguien te haya esperado con un vaso y un algodón.",
+                "Al alba, un poco de ella se quedó en la ramita, como un brillo de recuerdo, y un poco volvió al cielo, para no dejar el mapa incompleto. Así hay estrellas que son de dos sitios. En Navidad, eso no es perderse. Es caber.",
+            ),
+        ),
+        Story(
+            id = StoryId.RenoCalcetin,
+            title = "El reno de los calcetines",
+            origin = "Cuento original",
+            teaser = "Un reno recoge calcetines perdidos y los devuelve a la cama.",
+            coverColor = 0xFF4A5A3D,
+            shelves = setOf(StoryShelf.Christmas),
+            paragraphs = listOf(
+                "No todos los renos tiran del trineo. Uno, el más menudo, se llama Copo y su trabajo es otro: recoger los calcetines que se pierden en diciembre. Hay muchos. Detrás del sofá. Bajo la cama. En el radiador, duros como tostadas.",
+                "Copo no vuela alto. Vuela a la altura de las perchas. Entra por las ventanas entreabiertas, con cuidado de no despertar a los peces de plástico del baño. Lleva un saco pequeño, no de regalos: de pares. Porque un calcetín solo se pone triste.",
+                "En casa de Inés faltaba el calcetín de la rana. El otro, el de la seta, esperaba en el cajón con una paciencia de lana. Copo olfateó. Siguió un rastro de migas y de risa. Lo encontró abrazado a un cochecito, debajo del armario, soñando que era una bufanda.",
+                "—Vamos —le dijo Copo, muy bajito. El calcetín de la rana se dejó llevar. En el aire de la habitación olía a pino de plástico y a chocolate de la merienda. Copo los juntó en el cajón. El de la seta y el de la rana se reconocieron al tacto, que es como se saludan los calcetines.",
+                "Inés, medio dormida, creyó oír un cascabel. No abrió los ojos. En diciembre, si uno abre los ojos a cada ruido, no duerme nunca. Copo le dejó en la mesilla un pompón que se le había caído al saco, por si quería un recuerdo.",
+                "Luego fue a otra casa, y a otra. En una, los calcetines eran enormes, de papá. En otra, minúsculos, de bebé, calentitos como un suspiro. Copo no se equivocaba de cajón. Los renos de los pares tienen buen olfato para las tallas.",
+                "A veces encontraba uno que ya no tenía hermano. Esos los llevaba a un cajón especial, en el Polo, donde se hacen de nuevo pareja con otros solitarios. No es magia de fábrica. Es magia de «tú también sirves». Al invierno siguiente volvían, distintos y contentos.",
+                "Cuando el saco se llenaba, Copo se sentaba en un tejado a contar nieve. No tiraba de trineo. Oía, lejos, las campanas de quien sí vuela alto, y no tenía envidia. Cada reno tiene su noche. La suya olía a lana limpia.",
+                "Antes del alba volvió a su sitio, junto a una estufa que no quema, solo recuerda. Se quitó el cascabel para que no sonara al dormirse. Soñó con cajones ordenados y pies calientes. Es un buen sueño, para un reno.",
+                "Si alguna vez te falta un calcetín, no busques con enfado. Déjalo. Copo suele pasar cuando ya estás en la cama. Y si por la mañana el par está junto, no hace falta decir gracias en voz alta. Él oye igual, con las orejas de nieve.",
+            ),
+        ),
+        Story(
+            id = StoryId.CapitanLuciernaga,
+            title = "Capitán Luciérnaga",
+            origin = "Cuento original",
+            teaser = "Un héroe de luz suave ilumina el pasillo sin despertar a nadie.",
+            coverColor = 0xFF3D4A3A,
+            shelves = setOf(StoryShelf.Heroes, StoryShelf.Magic),
+            paragraphs = listOf(
+                "No todos los superhéroes llevan capa ruidosa. El Capitán Luciérnaga lleva una chaqueta que brilla como un frasco de luces. No vuela a romper nubes. Vuela a la altura de las cunas, para que el pasillo no esté tan oscuro cuando alguien va al baño.",
+                "De día es un farolero del parque, que cambia bombillas y saluda a los perros. De noche se pone el broche de luciérnaga —un broche que él mismo pintó— y escucha. Escucha llantos pequeños, puertas, vasos que se caen. Entonces va, sin sirena.",
+                "Una noche, Vera no encontraba a su oso. El cuarto parecía un bosque. El Capitán no encendió el techo. Encendió solo la chaqueta, un verde suave, y juntos miraron debajo de la cama, donde viven los calcetines y las sombras buenas.",
+                "El oso estaba abrazado a un libro. —Estaba leyendo —dijo Vera, aunque el oso no sabe leer. El Capitán asintió. Los osos leen con el peluche. Dejó el oso en su sitio, le dio un toque de luz en la nariz, y la oscuridad volvió a ser amiga, no enemiga.",
+                "En otra casa, un bebé tenía hipo. El Capitán no tenía poción. Tenía una canción de grillos. La cantó tan bajo que solo la cuna la oyó. El hipo se fue, como se va un tren pequeño. La madre, en el umbral, susurró gracias. Él hizo una reverencia de farolero.",
+                "Los villanos de su historia no son monstruos. Son el susto, la prisa, la luz demasiado blanca. El Capitán Luciérnaga los vence con dimmer: baja el mundo un punto. A veces eso basta para que un niño vuelva a ser valiente.",
+                "Tiene una compañera, la Doctora Polilla, que arregla las alas de las cortinas cuando se enredan. Juntos no pelean. Ordenan. Un superpoder de verdad, de noche, es dejar las cosas donde se pueden encontrar mañana.",
+                "Cuando termina la ronda, el Capitán se sienta en un banco del parque, aún cerrado, y apaga el broche. El cielo hace el resto. Él se queda un rato siendo farolero otra vez, aunque no haya bombillas que cambiar.",
+                "Si ves un brillo verde en el pasillo, no te asustes. No es un monstruo. Es alguien que aprendió que la valentía también puede ser suave. Tú puedes ser capitán de tu propio cuarto: basta una luz pequeña y no gritar.",
+                "Buenas noches, pasillo. Buenas noches, oso. El Capitán Luciérnaga ya va hacia otra cuna, tan callado que solo lo delatan las motas de polvo, que de pronto parecen estrellas de interior.",
+            ),
+        ),
+        Story(
+            id = StoryId.Superabuela,
+            title = "Superabuela",
+            origin = "Cuento original",
+            teaser = "Una abuela con capa de merienda resuelve los problemas de la tarde.",
+            coverColor = 0xFF6B4A3A,
+            shelves = setOf(StoryShelf.Heroes),
+            paragraphs = listOf(
+                "La Superabuela no salió de un cómic. Salió de un delantal. Su capa es de cuadros, huele a merienda, y el superpoder principal es llegar justo cuando el yogur se está a punto de caer. También sabe encontrar gafas, mandos y el nombre de ese primo que nadie recuerda.",
+                "Sus nietos, Nico y Lila, la llaman cuando hay un nudo en el cordón o un nudo en el pecho. Ella no vuela. Toma el ascensor, que es más seguro, y entra con un «ya estoy» que arregla media casa. El resto lo arregla con pan con aceite o con un cuento corto.",
+                "Un martes, el dibujo de Lila se le había arrugado. Lila lloraba como si el papel fuera un planeta. Superabuela no dijo «no es para tanto». Alisó el dibujo con la palma, le puso un libro encima y esperó. —Los planetas también se arrugan —dijo—. Luego se expanden otra vez.",
+                "Nico tenía miedo de un ruido en el armario. Superabuela abrió la puerta, sin drama, y sacó una caja que crujía porque era de cartón viejo. Dentro había ovillos. —Ves. Es lana que quiere hacerse bufanda. El miedo, al tener nombre, se hizo más pequeño.",
+                "Por la tarde venció al villano más difícil: el aburrimiento. No con pantallas. Con una caja de botones y el permiso de hacer un collar imposible. Lila eligió los azules. Nico, los que parecían monedas. Superabuela solo decía «bonito» en el momento justo.",
+                "Su debilidad es la siesta de las cinco. A esa hora la capa se convierte en manta y ella, en abuela normal, que también se cansa. Los nietos aprenden entonces otro poder: hablar bajito y dejarle el cojín. Los héroes se turnan.",
+                "De noche, Superabuela no patrulla la ciudad. Patrulla el pasillo hacia los vasos de agua. Si alguien tiene una pesadilla, se sienta en la cama y cuenta cómo el yogur, al final, no se cayó. Es un final bueno, y los finales buenos curan más que las capas.",
+                "Antes de irse a su casa, deja en la nevera un recado: «hay fruta». No es un recado de nevera. Es un hechizo de que mañana también habrá quien mire. Nico y Lila lo leen, aunque ya se lo saben.",
+                "Si quieres su uniforme, no hace falta tienda. Hace falta un delantal, paciencia y no reírse de los nudos ajenos. El resto —el «ya estoy», el pan, el libro sobre el dibujo— se aprende haciendo.",
+                "Buenas noches, Superabuela. La capa de cuadros cuelga en la silla. El mundo, en el piso, está a salvo hasta el desayuno. Y eso, para una heroína de merienda, es una misión cumplida.",
+            ),
+        ),
+        Story(
+            id = StoryId.BosqueSusurros,
+            title = "El bosque de los susurros",
+            origin = "Cuento original",
+            teaser = "Un bosque habla bajito y enseña a un niño a escuchar.",
+            coverColor = 0xFF2F4A3D,
+            shelves = setOf(StoryShelf.Magic),
+            paragraphs = listOf(
+                "Había un bosque que no gritaba. Ni siquiera cuando soplaba el viento. Hablaba en susurros: las hojas, el musgo, el agua escondida. Quien iba con prisa no oía nada. Quien iba despacio oía su nombre, dicho con cariño de árbol.",
+                "Bruno llegó un atardecer, porque se le había perdido el sombrero. El sombrero no era mágico. Era de lana, y le gustaba. El bosque lo había visto caer junto a un helecho. —Está aquí —susurraron las raíces—. Pero primero siéntate. Los sombreros encontrados con calma duran más.",
+                "Bruno se sentó. No es fácil, cuando uno busca. El musgo estaba frío y agradable. Un escarabajo pasó como un coche diminuto. Bruno, sin querer, empezó a respirar al ritmo de las ramas. El bosque, entonces, se atrevió a hablarle más claro.",
+                "—Nosotros no escondemos las cosas para molestar —dijo un pino joven—. Se nos caen igual que a ti las ideas. Bruno sonrió. Vio el sombrero, sí, pero también vio una seta redonda y una pluma de búho. Se quedó un rato más, aunque ya podía irse.",
+                "El arroyo le contó, en voz de cuchara, que de noche las piedras cambian un milímetro de sitio, solo para estirarse. El musgo le contó que le gusta la sombra. Bruno no respondía alto. Respondía con la cabeza, que es un idioma que los bosques respetan.",
+                "Cuando se puso el sombrero, el bosque le pidió un favor. —Si oyes un susurro en tu calle, no lo asustes. Puede ser un árbol de maceta que extraña esto. Bruno prometió. Las promesas, en aquel sitio, se enredaban en las lianas y no se olvidaban.",
+                "Volvió a casa por el mismo sendero, que ya no era el mismo: ahora tenía marcas invisibles de haber sido escuchado. Su madre le preguntó por qué tardó. —Estaba oyendo. Ella, que también había sido niña, no insistió.",
+                "Esa noche, en la cama, Bruno oía aún el pino. No con los oídos. Con el recuerdo, que a veces es más nítido. El sombrero estaba en la silla, secándose de un poco de rocío. El cuarto olía, un instante, a helecho.",
+                "Si alguna vez vas a un bosque y te parece mudo, prueba a sentarte. No le pidas tesoros. Pídele tiempo. El tesoro suele ser que te digan, bajito, que no estabas perdido: solo un poco rápido.",
+                "Buenas noches, raíces. Buenas noches, sombrero. El bosque de los susurros apaga sus voces, una a una, como quien cierra ventanas. Mañana, si alguien camina despacio, las volverá a abrir.",
+            ),
+        ),
+        Story(
+            id = StoryId.PrincesaNube,
+            title = "La princesa de las nubes",
+            origin = "Cuento original",
+            teaser = "Una princesa colecciona nubes y las presta cuando el cielo está triste.",
+            coverColor = 0xFF4A3D6B,
+            shelves = setOf(StoryShelf.Princesses, StoryShelf.Magic),
+            paragraphs = listOf(
+                "En un reino sin torres altas vivía la princesa Nube. No quería corona de oro. Quería una de vapor, que no aprieta. Su afición era coleccionar nubes: la de borrego, la de algodón de azúcar, la que parece un barco, la que parece un perro dormido.",
+                "No las cazaba. Las invitaba. Se asomaba a la terraza con una taza de leche y decía: —Si quieres, baja un rato. Las nubes, que están cansadas de ir siempre hacia el mismo viento, aceptaban. Se posaban en el patio, redondas, y ella les daba nombres suaves.",
+                "Una semana el cielo se quedó vacío, azul demasiado serio. Los campesinos miraban arriba, preocupados por la sequía de sueños: sin nubes, los niños no tenían en qué imaginar islas. La princesa abrió su colección. —Hoy prestamos —dijo.",
+                "Fue soltando nubes, una a una, sin prisa de reina. La de borrego fue a la escuela. La de barco, al puerto. La del perro dormido se quedó sobre el palacio, porque a los reyes también les hace falta una siesta de sombra.",
+                "Un niño del mercado le preguntó: —¿Y si no te las devuelven? Ella se encogió de hombros, que en una princesa de nubes queda bien. —Las nubes no se poseen. Se cuidan un rato. Luego son del cielo otra vez. Eso no es perder. Es el trato.",
+                "Por la tarde practicó un hechizo pequeño: hacer que una nube lloviera solo sobre un tiesto seco. No inundó la calle. El geranio dio las gracias a su manera, poniéndose más verde. La princesa se manchó los zapatos y no le importó.",
+                "De noche, cuando el cielo recuperó sus formas, ella se quedó con una sola nube, la más chiquita, para dormir. La puso sobre la cama como un dosel. No pesaba. Olió a lluvia que aún no cae. Los reyes, en la otra ala, oyeron un trueno lejano y sonrieron: era un trueno educado.",
+                "Soñó que su corona de vapor se deshacía y se convertía en muchos sombreros, uno para cada niño del reino. Al despertar, el patio estaba mojado de rocío. Las nubes prestadas habían vuelto, o habían mandado primas. Da igual. El cielo ya no estaba serio.",
+                "Si quieres ser de su corte, no hace falta linaje. Hace falta mirar arriba y no decir «solo es una nube». Decir, en cambio, «esa parece un barco». La princesa oye esas frases desde lejos y te apunta en su lista de amigos del vapor.",
+                "Buenas noches, colección. Buenas noches, cielo. La princesa de las nubes apaga la taza de leche y se duerme debajo de la más chiquita, que es la que mejor sabe quedarse quieta hasta mañana.",
+            ),
+        ),
+        Story(
+            id = StoryId.GuillePirata,
+            title = "Paytus Tridwood quiere ser pirata",
+            origin = "Cuento original",
+            teaser = "Un pirata novato, su cuchara-espada y Helen, que ya se sabe el truco.",
+            coverColor = 0xFF3A4F5A,
+            shelves = setOf(StoryShelf.Pirates),
+            paragraphs = listOf(
+                "En el muelle de la Cala Quieta vivía Paytus Tridwood, alto como un mástil mal plantado, con una espada que era, si uno era honesto, una cuchara de palo. Cada atardecer se plantaba ante los barcos, se aclaraba la garganta y decía, demasiado serio: —¡Quiero ser un pirata! Luego bajaba la voz. —Perdón. Quiero ser un pirata, por favor.",
+                "Los marineros se tapaban la sonrisa con la red. Helen, que ya era pirata de los buenos —los que saben dónde está el viento y dónde está el pan—, se apoyó en un poste. —Muy educado, Tridwood. Los piratas de grito se quedan sin voz. Los de «por favor» llegan a puerto.",
+                "Paytus se puso rojo hasta las orejas, que era mucho rojo. —Helen. No te había visto. Es decir: sí te había visto. Siempre te veo. Quiero decir… La cuchara se le resbaló y cayó al agua con un ploc educado. Un pez la devolvió, harto de cubiertos.",
+                "El marinero viejo, de barba de algodón, propuso tres pruebas. Primera: esperar sin gritar hasta que el sol se sentara en el agua. Paytus se sentó. A los dos minutos quiso anunciar la victoria. Helen le tapó la boca con un dedo, suave. —El sol todavía está de pie. Paytus asintió, heroico y callado. El muelle crujió, agradecido.",
+                "Segunda prueba: un nudo que se deshaga con un tirón amable. Paytus lo hizo mal tres veces. A la cuarta, el nudo parecía un pretzel. Helen lo deshizo con un dedo y le guió las manos. —Así. Los piratas de verdad también deshacen. Paytus miró el nudo como si fuera un tesoro. Para él, lo era.",
+                "Tercera prueba: la última galleta del camarote. Paytus la partió. Le dio a Helen la mitad mayor. Ella le devolvió un trozo. —Si no, te desmayas en el abordaje de almohadas. El loro del muelle dijo «galleta» tres veces, que era su forma de pedir la parte del loro.",
+                "Esa noche le prestaron un rincón en el barco Siesta. Helen se quedó en el muelle, porque mañana también hay marea. —Si sueñas con monstruos —dijo—, diles que tienes cita. Paytus no entendió. Luego sí: era una broma. Se rió bajito, para no despertar al mástil.",
+                "Soñó que un portero le pedía la contraseña de pirata. Casi grita una frase de película. Se acordó de Helen y dijo: —Por favor. El portero, que era un mapa, le dejó pasar. Detrás no había oro. Había un lápiz. —Dibuja el camino a la cama. Paytus lo dibujó corto. Bastó.",
+                "Al alba, Helen le puso en el pañuelo-sombrero una pluma de gaviota, encontrada, no arrancada. —Ya eres pirata de la cala, Tridwood. Los de los libros vendrán luego, si quieres. Paytus se tocó la pluma. Le pesaba poco. Le gustaba que pesara poco. Le gustaba, sobre todo, que se la hubiera puesto ella.",
+                "Si ves a Paytus Tridwood en un muelle, no le pidas que grite. Pídele el nudo suave. Y si dice «quiero ser un pirata» al lado de Helen, ya lo es: de los que esperan, parten la galleta y vuelven a dormir a casa, soñando con el mismo puerto.",
+            ),
+        ),
+        Story(
+            id = StoryId.TesoroGalleta,
+            title = "El mapa de Helen",
+            origin = "Cuento original",
+            teaser = "Paytus sigue un mapa al revés. El tesoro ya lo conocía de vista.",
+            coverColor = 0xFF4A3D32,
+            shelves = setOf(StoryShelf.Pirates, StoryShelf.Magic),
+            paragraphs = listOf(
+                "Paytus Tridwood encontró bajo una piedra un mapa que se enrollaba solo, como un gato con prisa. En la esquina decía: «X marca a Helen». Paytus se puso el pañuelo al revés, de lo nervioso. —Un mapa. De Helen. O hacia Helen. Los mapas son confusos cuando uno está enamorado.",
+                "El mapa, harto de tanto temblor, se puso a dibujar. Tres pasos: la red, el farol, la hamaca. Toda la cala. —Cerca —murmuró Paytus—. Los tesoros cerca se encuentran antes de que uno invente un discurso.",
+                "En la red había un pez que no quería ser pescado. Quería que lo devolvieran y, de paso, que Paytus dejara de ensayar cumplidos en voz alta. —Helen, tus ojos son… dos faroles. No. Dos limones. Peor. El pez hizo un círculo de «por favor, suéltame». Paytus lo soltó. El mapa se oscureció, contento.",
+                "En el farol faltaba el cristal. Paytus no tenía cristal. Tenía una tapa de tarro y un nudo de pretzel. Lo ató. El farol brilló como un caramelo. Un cangrejo se detuvo a calentarse las pinzas. —¿Has visto a Helen? El cangrejo señaló el muelle, que era donde Helen había estado siempre.",
+                "Paytus no miró el muelle. Miró la hamaca, porque el mapa mandaba. La hamaca estaba enredada. Dentro, un lazo azul de Helen y una galleta. En la galleta, una X de miga. —El tesoro es un lazo —dijo, emocionado—. O una merienda. O las dos cosas, que es lo mejor que le puede pasar a un pirata.",
+                "Helen tosió detrás de él. Llevaba el pelo suelto y una sonrisa de quien ha visto el mapa desde el principio. —Tridwood. Ese mapa lo dibujé yo, para que no te perdieras buscando un tesoro que está en el muelle. Paytus se quedó con la galleta a medio aire. —Ah.",
+                "Partieron la galleta. El loro dijo «Helen» en vez de «galleta», que era un ascenso. Paytus le ofreció el lazo. —Lo encontré. Heroicamente. Con un nudo horrible. Ella se lo puso. —Heroicamente es mucho decir. Pero el nudo tiene encanto.",
+                "Esa noche, en el Siesta, Paytus contó la aventura al revés, para que durara más. El marinero viejo le sirvió agua de lima. —Los mapas de Helen siempre acaban en Helen —dijo—. Es un truco viejo. Paytus asintió, feliz de haber caído.",
+                "Soñó que la X del techo se paraba encima de dos almohadas. Entendió el recado: a veces el tesoro te espera en el muelle, riéndose bajito, y el mapa solo sirve para que uno dé un paseo digno.",
+                "Buenas noches, mapa. Buenas noches, lazo. Si mañana hay otra X, Paytus Tridwood irá despacio. Y si el mapa dice Helen, ya sabe adónde ir: no hace falta ser un pirata legendario. Basta con no perder el lazo.",
+            ),
+        ),
+        Story(
+            id = StoryId.IslaSiesta,
+            title = "La isla de la siesta",
+            origin = "Cuento original",
+            teaser = "Paytus y Helen desembarcan donde el mayor botín es callarse un rato.",
+            coverColor = 0xFF2F4A4A,
+            shelves = setOf(StoryShelf.Pirates),
+            paragraphs = listOf(
+                "El Siesta zarpó un día que el mar parecía una sábana. Paytus Tridwood iba de vigía, que en aquel barco significaba mirar sin inventar peligros. Helen iba de capitana del día, porque el marinero viejo le había cedido el sombrero. —Tierra —gritó Paytus, y se tapó la boca—. Tierra, susurrado.",
+                "Helen le pasó los prismáticos. Eran de juguete. —Esa isla no se conquista. Se visita. Paytus asintió con la gravedad de quien ha leído demasiados carteles. Se quitó los zapatos. La arena estaba tibia. Intentó marcar una X con el pie. Le salió una S. —De Siesta —dijo, salvando el honor.",
+                "En el centro, un letrero torcido: «Prohibido el alboroto. Permitido el tesoro». Paytus saludó al letrero. Helen no lo detuvo. Un cangrejo les cedió el paso, educado, y señaló una cala donde el agua ni siquiera hacía olas: hacía respiración.",
+                "Había un cofre. Paytus no lo forzó. Se inclinó: —¿Puedo? ¿En nombre de la capitana Helen? El cofre, que tenía un gozne dormido, se abrió un palmo. Dentro, una hamaca y una nota: «El que la cuelga bien puede echarse. El que grita, rema de vuelta».",
+                "Paytus colgó la hamaca. El nudo salió pretzel. Helen lo corrigió sin burla. Se metieron los dos. El cielo, visto desde abajo, era un pañuelo azul. Paytus quiso contar una hazaña y se le olvidó. Se le olvidó de tan bien que estaba. Helen, que también se había olvidado, le apretó la mano.",
+                "Un mono del sitio —de una sola cabeza, de los normales— se sentó a pelar una fruta. Compartió dos trozos. Paytus dijo gracias con los ojos. El mono, profesional, no pidió monedas. En aquella isla el dinero era siesta.",
+                "Por la tarde, el viejo roncó como un faro bueno. El Siesta se mecía. Nadie abordó a nadie. Paytus susurró: —Helen, si esto es una aventura, es la mejor. Ella: —Es una siesta. Las buenas también cuentan.",
+                "Cuando el sol se puso color galleta, recogieron la hamaca. Paytus la dobló como un secreto. La dejó en el cofre. El letrero pareció más derecho. Helen le arregló el pañuelo-sombrero, que se le había ido a estribor.",
+                "De vuelta, el loro quiso gritar el nombre de la isla. Paytus y Helen, a la vez, le pidieron que lo susurrara. El loro susurró «siesta» y se tapó las alas. El mar no hizo espuma. Solo camino.",
+                "En tierra, Paytus cerró los ojos y volvió a la hamaca, con Helen en el recuerdo de la mano. Había sido pirata de una isla que no se lleva en el saco. Buenas noches, cala. Buenas noches, cofre. El tesoro sigue colgado, por si mañana alguien sabe preguntar antes de abrir.",
+            ),
+        ),
+        Story(
+            id = StoryId.DueloCumplidos,
+            title = "El duelo de cumplidos",
+            origin = "Cuento original",
+            teaser = "Paytus no pelea: echa piropos. Helen lleva el marcador.",
+            coverColor = 0xFF5A3D3A,
+            shelves = setOf(StoryShelf.Pirates),
+            paragraphs = listOf(
+                "Al muelle llegó un pirata hinchado, de sombrero más ancho que el barco. Se llamaba Bravucón de la Marea —o eso dijo— y buscaba un duelo. Paytus Tridwood tragó saliva. La cuchara-espada le tembló. Helen se cruzó de brazos. —En esta cala no se lucha. Se conversa. El que quede sin palabras, pierde. Y se va a la cama.",
+                "Bravucón rió, que su risa ocupaba dos muelles. —¡Tú, palillo! Te voy a hundir con frases. Paytus se plantó. Se le olvidó el discurso. Helen le sopló al oído: —Di algo bonito. De verdad. No de libro. Paytus asintió, valiente y perdido.",
+                "Bravucón empezó: —Tu sombrero parece un trapo de platos. Paytus miró el pañuelo. Era un trapo de platos. —Gracias —dijo—. Seca muy bien. El viento de la cala se rió. Bravucón parpadeó. No estaba previsto el agradecimiento.",
+                "Paytus, animado, probó: —Tu sombrero es tan grande que podrían echarse una siesta debajo. Bravucón se tocó el ala. —¿Eso es un insulto? —Es un cumplido con sombra —dijo Helen, anotando un punto en el aire—. Uno a cero.",
+                "Bravucón, ofendido de no estar ofendido, intentó otra: —Tus rodillas parecen nudos. Paytus se miró las rodillas. —Los nudos de Helen son mejores. Pero gracias por fijarte. El loro aplaudió con las alas. Bravucón se quedó sin la segunda frase.",
+                "Paytus, ya en racha, se inclinó: —Tienes una voz de faro. Si alguna vez te cansas de gritar, esta cala necesita un faro que bostece. Bravucón abrió la boca. No salió bravuconería. Salió un bostezo enorme, de los que cambian el tiempo.",
+                "Helen levantó la mano. —Duelo terminado. Gana Tridwood, por quedarse sin odio y con un faro nuevo. Bravucón, rendido, se sentó en el muelle. El sombrero le hizo de techo. —¿Hay galleta para los vencidos? Había. Paytus partió la suya. Partir era su mejor abordaje.",
+                "Al atardecer, Bravucón —que pidió que le llamaran Bruno— ayudó a recoger redes. El sombrero, plegado, cabía en un cubo. Helen le guiñó un ojo a Paytus. —Has sido un pirata legendario. De los que ganan hablando. Paytus se puso rojo otra vez. Se le daba bien.",
+                "Esa noche, Paytus no soñó con espadas. Soñó con frases suaves que se devolvían como pelotas de playa. Helen, en el sueño, llevaba el marcador. El marcador decía «buenas noches». Era un empate perfecto.",
+                "Si algún día llega otro Bravucón, ya se sabe la regla de la Cala Quieta: no se pega. Se echa un cumplido. Se parte una galleta. Y se duerme todo el muelle, incluso el sombrero.",
+            ),
+        ),
+        Story(
+            id = StoryId.GuilleElige,
+            title = "¿Qué hace Paytus?",
+            origin = "Aventura para elegir",
+            teaser = "Paytus y Helen hallan un mapa. Pregunta: ¿muelle o playa?",
+            coverColor = 0xFF3A4F5A,
+            shelves = setOf(StoryShelf.Pirates),
+            paragraphs = listOf(
+                "Paytus Tridwood encontró en el muelle una botella. Dentro no había un genio. Había un mapa dibujado con miga de galleta. Dos caminos: uno hacia las cuerdas, otro hacia la arena.",
+                "Helen se asomó por encima de su hombro. —Tú eliges, Tridwood. Yo ya sé dónde acaba. El loro, que ya se sabía el truco, no gritó. Esperó. Paytus se puso el pañuelo-sombrero y miró a quien estuviera al lado de la cama.",
+            ),
+            adventure = StoryAdventure(
+                nodes = listOf(
+                    StoryNode(
+                        // audio:guille_elige
+                        id = "start",
+                        paragraphs = listOf(
+                            "Paytus Tridwood encontró en el muelle una botella. Dentro no había un genio. Había un mapa dibujado con miga de galleta. Dos caminos: uno hacia las cuerdas, otro hacia la arena.",
+                            "Helen se asomó por encima de su hombro. —Tú eliges, Tridwood. Yo ya sé dónde acaba. El loro, que ya se sabía el truco, no gritó. Esperó. Paytus se puso el pañuelo-sombrero y miró a quien estuviera al lado de la cama.",
+                        ),
+                        question = "¿Por dónde vamos?",
+                        choices = listOf(
+                            StoryChoice("Por el muelle", "muelle"),
+                            StoryChoice("Por la playa", "playa"),
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:guille_elige_muelle
+                        id = "muelle",
+                        paragraphs = listOf(
+                            "Fueron por el muelle. Las tablas crujían como quien cuenta un secreto. El marinero viejo estaba allí, con una cuerda y una galleta, las dos a medias.",
+                            "—Llegáis a tiempo —dijo—. La hamaca quiere un nudo, o la merienda quiere compañía. Yo no decido. Lo decide la tripulación pequeña. Helen le guiñó un ojo a Paytus: —Esta vez no ensayes un discurso.",
+                        ),
+                        question = "¿Qué hacemos?",
+                        choices = listOf(
+                            StoryChoice("Atamos la hamaca", "hamaca"),
+                            StoryChoice("Partimos la galleta", "galleta"),
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:guille_elige_playa
+                        id = "playa",
+                        paragraphs = listOf(
+                            "Fueron por la playa. La arena estaba tibia. Un cangrejo les cedió el paso y señaló, con una pinza educada, una nota en una concha.",
+                            "La nota decía dos cosas, porque las notas de esta cala no se deciden: «Leedme bajito» y «Haced un castillo para echarse». Paytus se aclaró la garganta. Helen: —Bajito, Tridwood. El mar ya te oye.",
+                        ),
+                        question = "¿Qué hacemos?",
+                        choices = listOf(
+                            StoryChoice("Leemos el recado", "recado"),
+                            StoryChoice("Hacemos un castillo", "castillo"),
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:guille_elige_hamaca
+                        id = "hamaca",
+                        paragraphs = listOf(
+                            "Paytus hizo el nudo pretzel. Helen lo corrigió, suave. La hamaca quedó redonda entre dos postes. Se metieron los cuatro: Paytus, Helen, el marinero y el loro, que cabe si se hace pequeño.",
+                            "El muelle se meció. Paytus susurró: —Helen, esto es un abordaje perfecto. Ella: —Es una siesta. Las buenas también cuentan. La cuchara-espada se quedó en el bolsillo, de guardia dormida.",
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:guille_elige_galleta
+                        id = "galleta",
+                        paragraphs = listOf(
+                            "Partieron la galleta en trozos chiquitos, para que alcanzara. Sabía a canela y a muelle. El loro dijo «Helen» y luego «gracias», que era un ascenso.",
+                            "Con la boca llena no se puede gritar, así que la noche bajó sola. Paytus se limpió una miga. Helen le quitó otra, de la oreja. El marinero guardó un trozo para mañana, que también es un puerto.",
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:guille_elige_recado
+                        id = "recado",
+                        paragraphs = listOf(
+                            "Leieron el recado en voz de calcetín. Decía: «La siesta está detrás de la duna más baja. No corráis». Detrás de la duna había una toalla olvidada, calentita de sol.",
+                            "Se tumbaron. El cangrejo hizo de despertador que no suena. Paytus soñó que el mapa ahora tenía un solo camino: el de vuelta a la almohada, con Helen en el margen, dibujada de farol.",
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:guille_elige_castillo
+                        id = "castillo",
+                        paragraphs = listOf(
+                            "Hicieron un castillo bajo, con almenas de palo y una puerta que no se cierra. Dentro cupieron Paytus y Helen si se acurrucaban. El cangrejo se quedó de portero, sin lance.",
+                            "La marea, educada, no lo derribó. Solo le puso una orilla de espuma como sábana. Paytus bostezó. Helen le arregló el pañuelo. El castillo, de arena y de acuerdo, se quedó velando hasta mañana.",
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        Story(
+            id = StoryId.EstrellaElige,
+            title = "¿Dónde se posa la estrella?",
+            origin = "Aventura para elegir",
+            teaser = "Una estrella se perdió. Pregunta: ¿seguimos la canela o al gato?",
+            coverColor = 0xFF5A3D4A,
+            shelves = setOf(StoryShelf.Christmas, StoryShelf.Magic),
+            paragraphs = listOf(
+                "Una estrella pequeña bajó a la calle, despacio, para no asustar a los tejados. El farol le dijo: hay dos olores de camino. Uno a canela. Otro a gato con lazo.",
+                "La estrella no sabía cuál era el suyo. Se quedó quieta, brillando lo justo, y esperó a que alguien de la cama eligiera.",
+            ),
+            adventure = StoryAdventure(
+                nodes = listOf(
+                    StoryNode(
+                        // audio:estrella_elige
+                        id = "start",
+                        paragraphs = listOf(
+                            "Una estrella pequeña bajó a la calle, despacio, para no asustar a los tejados. El farol le dijo: hay dos olores de camino. Uno a canela. Otro a gato con lazo.",
+                            "La estrella no sabía cuál era el suyo. Se quedó quieta, brillando lo justo, y esperó a que alguien de la cama eligiera.",
+                        ),
+                        question = "¿A quién seguimos?",
+                        choices = listOf(
+                            StoryChoice("A la canela", "canela"),
+                            StoryChoice("Al gato", "gato"),
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:estrella_elige_canela
+                        id = "canela",
+                        paragraphs = listOf(
+                            "Siguieron la canela hasta una ventana baja. Dentro, un niño y una niña ponían una ramita en un vaso. En la ramita no había punta. Huelía a galleta y a pijama.",
+                            "La estrella podía entrar, o podía quedarse en el alféizar, de farolito tímido. Las dos cosas son un buen sitio.",
+                        ),
+                        question = "¿Dónde se queda?",
+                        choices = listOf(
+                            StoryChoice("En la ramita", "ramita"),
+                            StoryChoice("En la ventana", "ventana"),
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:estrella_elige_gato
+                        id = "gato",
+                        paragraphs = listOf(
+                            "El gato del lazo no tenía prisa. Las llevó por los tejados, paso de calcetín. Abajo, las luces parecían migas. Arriba, el cielo tenía un hueco del tamaño de la estrella.",
+                            "El gato se sentó junto a una chimenea tibia. —Puedes volver al hueco —miaú, que aquella noche quería decir eso— o dormirte aquí, junto al humo.",
+                        ),
+                        question = "¿Dónde se queda?",
+                        choices = listOf(
+                            StoryChoice("Vuelve al cielo", "cielo"),
+                            StoryChoice("Junto al gato", "humo"),
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:estrella_elige_ramita
+                        id = "ramita",
+                        paragraphs = listOf(
+                            "La estrella se posó en la ramita. El vaso tembló, feliz. Encendieron una sola lucecita, para no marearla. El niño le puso algodón debajo, por si el cristal estaba frío.",
+                            "A medianoche el cielo la vio y no la reclamó. Esta noche trabajaba en otro mapa. Los niños se durmieron. La ramita no se movió. Brillar bajito también es un trabajo.",
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:estrella_elige_ventana
+                        id = "ventana",
+                        paragraphs = listOf(
+                            "Se quedó en el alféizar, como un botón de luna. Desde dentro se veía. Desde fuera también. El gato, más tarde, pasó y le dijo miaú, que era «buenas noches».",
+                            "La ramita se conformó con el algodón. La estrella se conformó con la ventana. A veces el mejor sitio es el que mira a los dos lados y no elige del todo.",
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:estrella_elige_cielo
+                        id = "cielo",
+                        paragraphs = listOf(
+                            "La estrella subió despacio, para no marear al gato. El hueco la recibió como una cama hecha. El lazo del gato, abajo, parecía otra estrella, más cercana.",
+                            "Desde allí vio la ramita, el vaso, el farol. No se había perdido. Había dado un paseo. El cielo, que es generoso, le dejó el recuerdo de la canela hasta mañana.",
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:estrella_elige_humo
+                        id = "humo",
+                        paragraphs = listOf(
+                            "Se acurrucó junto al humo, que era calentito y no picaba. El gato ronroneó un mapa. El hueco del cielo se quedó abierto, por si acaso, como una puerta sin llave.",
+                            "Al alba, un poco de ella volvió arriba y un poco se quedó en el tejado, hecho brillo de rocío. En diciembre, caber en dos sitios no es perderse.",
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        Story(
+            id = StoryId.NinoElige,
+            title = "¿Qué apaga Nino?",
+            origin = "Aventura para elegir",
+            teaser = "El robot no encuentra el OFF. Pregunta: ¿cocina o pasillo?",
+            coverColor = 0xFF3D5A5A,
+            coverArt = R.drawable.ill_nino_elige,
+            shelves = setOf(StoryShelf.Modern),
+            paragraphs = listOf(
+                "Nino, el robot de caja de zapatos, seguía en ON. El led azul le hacía tic, tic. Marta, en pijama, bostezó. —Hay que apagar algo. No todo. Algo.",
+                "Había dos luces todavía: la de la cocina, que parecía un sol pequeño, y la del pasillo, que parecía un ratón claro.",
+            ),
+            adventure = StoryAdventure(
+                nodes = listOf(
+                    StoryNode(
+                        // audio:nino_elige
+                        id = "start",
+                        paragraphs = listOf(
+                            "Nino, el robot de caja de zapatos, seguía en ON. El led azul le hacía tic, tic. Marta, en pijama, bostezó. —Hay que apagar algo. No todo. Algo.",
+                            "Había dos luces todavía: la de la cocina, que parecía un sol pequeño, y la del pasillo, que parecía un ratón claro.",
+                        ),
+                        question = "¿Qué apagamos primero?",
+                        choices = listOf(
+                            StoryChoice("La cocina", "cocina"),
+                            StoryChoice("El pasillo", "pasillo"),
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:nino_elige_cocina
+                        id = "cocina",
+                        paragraphs = listOf(
+                            "Fueron a la cocina. Nino rodó sin hacer ruido de rueda. Marta apagó el sol pequeño. Quedó el led de Nino, tímido, y el nevera haciendo un zumbido de nana.",
+                            "Encima de la mesa había una pegatina de luna y un vaso de agua. Las dos cosas sirven de noche.",
+                        ),
+                        question = "¿Qué hacemos ahora?",
+                        choices = listOf(
+                            StoryChoice("La pegatina", "pegatina"),
+                            StoryChoice("Un sorbo de agua", "agua"),
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:nino_elige_pasillo
+                        id = "pasillo",
+                        paragraphs = listOf(
+                            "Fueron al pasillo. La luz-ratón se apagó. El suelo se hizo bosque suave. Nino encendió solo el led, para que nadie tropezara con un calcetín.",
+                            "Al fondo, la puerta de Marta estaba entreabierta. También estaba el enchufe, que zumbaba bajito, como un grillo de casa.",
+                        ),
+                        question = "¿Adónde va Nino?",
+                        choices = listOf(
+                            StoryChoice("A la cama", "cama"),
+                            StoryChoice("Al enchufe", "enchufe"),
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:nino_elige_pegatina
+                        id = "pegatina",
+                        paragraphs = listOf(
+                            "Marta le puso la luna en el pecho, encima del led. Nino se volvió linterna tímida. Ya no hacía tic de prisa. Hacía tic de reloj de cuna.",
+                            "Rodó hasta la alfombra y se quedó quieto. Marta se tapó. El ON podía esperar a mañana, cuando el sol de verdad se encienda solo.",
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:nino_elige_agua
+                        id = "agua",
+                        paragraphs = listOf(
+                            "Marta bebió un sorbo. Nino sostuvo el vaso con las pinzas, muy serio, como un camarero de madrugada. Devolvió el vaso a su sitio, sin gotear.",
+                            "Luego se apagó un poco. El led se quedó en brillo de vela. Marta dijo «gracias, Nino» y el robot guardó esas dos palabras en su memoria blanda, junto al OFF.",
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:nino_elige_cama
+                        id = "cama",
+                        paragraphs = listOf(
+                            "Nino acompañó a Marta hasta la almohada. Le tapó el brazo que se había escapado. No pitó. Las linternas tímidas no despiertan a nadie.",
+                            "Se puso al pie de la cama, de guardia que no vigila: solo espera. El pasillo, a oscuras, ya no era un bosque. Era un camino de vuelta, por si el vaso hacía falta.",
+                        ),
+                    ),
+                    StoryNode(
+                        // audio:nino_elige_enchufe
+                        id = "enchufe",
+                        paragraphs = listOf(
+                            "Nino se acercó al enchufe, no para cargarse del todo, sino para oír el zumbido. Las casas, de noche, hablan en corriente. Él contestó con un led más bajo.",
+                            "Marta, desde la cama, lo vio como una estrella de interior. —Buenas noches, interruptor. Nino guardó el ON para el sol. El pasillo se quedó en paz.",
+                        ),
+                    ),
+                ),
+            ),
+        ),
     )
+
+    val tales: List<Story> = stories.filter { !it.isAdventure() }
+    val adventures: List<Story> = stories.filter { it.isAdventure() }
 
     fun story(id: StoryId): Story = stories.first { it.id == id }
 
-    fun storyOfTheDay(dayOfYear: Int): Story {
-        val index = (dayOfYear - 1).mod(stories.size)
-        return stories[index]
-    }
+    fun taleOfTheDay(dayOffset: Int): Story =
+        tales[dayOffset.mod(tales.size)]
+
+    fun adventureOfTheDay(dayOffset: Int): Story =
+        adventures[dayOffset.mod(adventures.size)]
 }

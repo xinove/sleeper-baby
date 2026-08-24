@@ -42,23 +42,37 @@ object StoryLibraryController {
         }
     }
 
-    fun today(): Story {
+    fun todayTale(): Story {
         if (!::store.isInitialized) {
-            return StoryCatalog.stories.first()
+            return StoryCatalog.tales.first()
         }
-        return store.today()
+        return store.todayTale()
     }
 
+    fun todayAdventure(): Story {
+        if (!::store.isInitialized) {
+            return StoryCatalog.adventures.first()
+        }
+        return store.todayAdventure()
+    }
+
+    fun todayStories(): List<Story> = listOf(todayTale(), todayAdventure())
+
     fun unlockedCount(): Int =
-        if (::store.isInitialized) store.unlockedCount() else 1
+        if (::store.isInitialized) store.unlockedCount() else 2
 
     fun isUnlocked(story: Story): Boolean =
-        if (::store.isInitialized) store.isUnlocked(story) else story.id == StoryCatalog.stories.first().id
+        if (::store.isInitialized) {
+            store.isUnlocked(story)
+        } else {
+            story.id == StoryCatalog.tales.first().id ||
+                story.id == StoryCatalog.adventures.first().id
+        }
 
-    fun unlockedStories(): List<Story> = listOf(today())
+    fun unlockedStories(): List<Story> = todayStories()
 
     fun openTodayGift() {
-        open(today())
+        mutableShowPopup.value = true
     }
 
     fun openLibrary() {
@@ -80,13 +94,13 @@ object StoryLibraryController {
         mutableShowPopup.value = false
     }
 
-    fun openAndListen(story: Story) {
+    fun openAndListen(story: Story, nodeId: String? = null) {
         if (!isUnlocked(story)) {
             showLockedHint(story)
             return
         }
         open(story)
-        SleepRadioController.playStory(story)
+        SleepRadioController.playStory(story, nodeId)
     }
 
     fun closeReader() {
@@ -98,10 +112,6 @@ object StoryLibraryController {
         mutableShowPopup.value = false
     }
 
-    fun readToday() {
-        open(today())
-    }
-
     fun clearLockedHint() {
         mutableLockedHint.value = null
     }
@@ -109,7 +119,9 @@ object StoryLibraryController {
     private fun showLockedHint(story: Story) {
         val days = if (::store.isInitialized) store.daysUntilUnlock(story) else 1
         mutableLockedHint.value = when {
+            days <= 1 && story.isAdventure() -> "Mañana toca otra aventura"
             days <= 1 -> "Mañana toca otro cuento"
+            story.isAdventure() -> "Esta aventura vuelve en $days días"
             else -> "Este cuento vuelve en $days días"
         }
     }

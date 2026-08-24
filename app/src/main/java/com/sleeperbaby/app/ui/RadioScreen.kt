@@ -35,8 +35,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
@@ -66,7 +66,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sleeperbaby.app.data.Catalog
 import com.sleeperbaby.app.data.Channel
+import com.sleeperbaby.app.data.LullabyShelf
 import com.sleeperbaby.app.data.Station
+import com.sleeperbaby.app.data.StationKind
+import com.sleeperbaby.app.data.lullabyInfinite
+import com.sleeperbaby.app.data.lullabyMix
+import com.sleeperbaby.app.data.lullabyShelf
+import com.sleeperbaby.app.data.lullabySongs
 import com.sleeperbaby.app.library.StoryLibraryController
 import com.sleeperbaby.app.playback.NightLightController
 import com.sleeperbaby.app.playback.NightLightMode
@@ -93,11 +99,21 @@ fun RadioScreen(onPlayRequest: () -> Unit) {
     val state by SleepRadioController.state.collectAsStateWithLifecycle()
     val selected = Catalog.station(state.station)
     val channel = Catalog.channel(state.channelId)
-    var playerExpanded by remember { mutableStateOf(true) }
+    var playerExpanded by remember { mutableStateOf(false) }
     val listBottomPadding by animateDpAsState(
-        targetValue = (if (playerExpanded) 338.dp else 124.dp) + AdBannerHeight + 8.dp,
+        targetValue = (if (playerExpanded) 292.dp else 92.dp) + AdBannerHeight + 8.dp,
         label = "list-bottom-padding",
     )
+    val listState = rememberLazyListState()
+    var stationScrollReady by remember { mutableStateOf(false) }
+    LaunchedEffect(state.station) {
+        if (!stationScrollReady) {
+            stationScrollReady = true
+            return@LaunchedEffect
+        }
+        val index = 1 + Catalog.stations.indexOfFirst { it.kind == state.station }.coerceAtLeast(0)
+        listState.animateScrollToItem(index)
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         LaunchedEffect(Unit) {
@@ -105,6 +121,7 @@ fun RadioScreen(onPlayRequest: () -> Unit) {
         }
         NightSkyBackground()
         LazyColumn(
+            state = listState,
             modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding(),
@@ -141,28 +158,32 @@ fun RadioScreen(onPlayRequest: () -> Unit) {
             }
             Catalog.stations.forEach { station ->
                 item(key = station.kind.name) {
-                    StationCard(
-                        station = station,
-                        selected = station.kind == state.station,
-                        onClick = { SleepRadioController.selectStation(station.kind) },
-                    )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .animateContentSize(),
+                    ) {
+                        StationCard(
+                            station = station,
+                            selected = station.kind == state.station,
+                            onClick = { SleepRadioController.selectStation(station.kind) },
+                        )
+                        AnimatedVisibility(
+                            visible = station.kind == state.station,
+                            enter = fadeIn() + expandVertically(),
+                            exit = fadeOut() + shrinkVertically(),
+                        ) {
+                            StationChannelPicker(
+                                station = station,
+                                selectedId = state.channelId,
+                                onSelect = SleepRadioController::selectChannel,
+                            )
+                        }
+                    }
                 }
             }
             item {
                 LibrarySection()
-            }
-            item {
-                Text(
-                    text = "Canal de ${selected.title}",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = Mist,
-                    modifier = Modifier.padding(top = 8.dp),
-                )
-                ChannelRow(
-                    channels = selected.channels,
-                    selectedId = state.channelId,
-                    onSelect = SleepRadioController::selectChannel,
-                )
             }
             item {
                 NightLightCard()
@@ -259,13 +280,11 @@ private fun StationCard(
         if (selected) WarmGold.copy(alpha = 0.9f) else Color.White.copy(alpha = 0.22f),
         label = "station-border",
     )
-    val shape = RoundedCornerShape(30.dp)
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = 118.dp)
-            .shadow(if (selected) 14.dp else 0.dp, shape, clip = false)
-            .clip(shape)
+            .heightIn(min = 108.dp)
+            .clip(SleeperCardShape)
             .background(
                 Brush.verticalGradient(
                     listOf(
@@ -274,13 +293,19 @@ private fun StationCard(
                     ),
                 ),
             )
-            .border(1.dp, border, shape)
+            .border(1.dp, border, SleeperCardShape)
             .clickable(onClick = onClick)
             .padding(start = 14.dp, end = 12.dp, top = 12.dp, bottom = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        StationLeading(station = station, selected = selected)
+        SleeperIconWell(selected = selected) {
+            AppIcon(
+                resId = station.leadingArt,
+                contentDescription = station.title,
+                modifier = Modifier.size(28.dp),
+            )
+        }
         Column(modifier = Modifier.weight(1f)) {
             Text(station.title, style = MaterialTheme.typography.titleMedium, color = Color.White)
             Text(station.subtitle, style = MaterialTheme.typography.bodyMedium, color = MuteText)
@@ -299,8 +324,7 @@ private fun StationArtCircle(
 ) {
     Box(
         modifier = Modifier
-            .size(96.dp)
-            .shadow(if (selected) 10.dp else 4.dp, CircleShape, clip = false)
+            .size(88.dp)
             .clip(CircleShape)
             .background(Color(0xFF1A3358))
             .border(
@@ -320,56 +344,28 @@ private fun StationArtCircle(
     }
 }
 
-@Composable
-private fun StationLeading(
-    station: Station,
-    selected: Boolean,
-) {
-    Box(
-        modifier = Modifier
-            .size(48.dp)
-            .clip(CircleShape)
-            .background(
-                Brush.radialGradient(
-                    listOf(
-                        if (selected) WarmGold.copy(alpha = 0.38f) else Color.White.copy(alpha = 0.14f),
-                        if (selected) WarmGold.copy(alpha = 0.08f) else Color.White.copy(alpha = 0.04f),
-                    ),
-                ),
-            ),
-        contentAlignment = Alignment.Center,
-    ) {
-        AppIcon(
-            resId = station.leadingArt,
-            contentDescription = station.title,
-            modifier = Modifier.size(28.dp),
-        )
-    }
-}
-
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun NightLightCard() {
+    val light by NightLightController.state.collectAsStateWithLifecycle()
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(28.dp))
-            .background(
-                Brush.verticalGradient(listOf(NightCardSelected, NightCard)),
-            )
-            .border(1.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(28.dp))
+            .sleeperCard()
             .padding(18.dp),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            Image(
-                painter = painterResource(AppIcons.shush),
-                contentDescription = "Luz nocturna",
-                modifier = Modifier.size(52.dp),
-                contentScale = ContentScale.Fit,
-            )
+            SleeperIconWell {
+                Image(
+                    painter = painterResource(AppIcons.shush),
+                    contentDescription = "Luz nocturna",
+                    modifier = Modifier.size(32.dp),
+                    contentScale = ContentScale.Fit,
+                )
+            }
             Column {
                 Text("Luz nocturna", style = MaterialTheme.typography.titleMedium, color = Color.White)
                 Text(
@@ -389,27 +385,169 @@ private fun NightLightCard() {
                 NightLightMode.Animals,
                 NightLightMode.Stars,
             ).forEach { mode ->
-                Row(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(50))
-                        .background(WarmGold)
-                        .clickable { NightLightController.setMode(mode) }
-                        .padding(horizontal = 12.dp, vertical = 7.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                ) {
-                    AppIcon(
-                        resId = AppIcons.nightLight(mode),
-                        contentDescription = mode.label(),
-                        modifier = Modifier.size(18.dp),
-                    )
-                    Text(
-                        text = mode.label(),
-                        color = NightNavy,
-                        style = MaterialTheme.typography.labelLarge,
+                SleeperChip(
+                    label = mode.label(),
+                    selected = light.mode == mode,
+                    onClick = { NightLightController.setMode(mode) },
+                    icon = {
+                        AppIcon(
+                            resId = AppIcons.nightLight(mode),
+                            contentDescription = mode.label(),
+                            modifier = Modifier.size(18.dp),
+                        )
+                    },
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun StationChannelPicker(
+    station: Station,
+    selectedId: String,
+    onSelect: (String) -> Unit,
+) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        if (station.kind == StationKind.Lullaby) {
+            Text(
+                text = "Elige un estilo. Luego la mezcla o una nana concreta.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MuteText,
+                modifier = Modifier.padding(top = 12.dp),
+            )
+            LullabyPicker(
+                station = station,
+                selectedId = selectedId,
+                onSelect = onSelect,
+            )
+        } else {
+            Text(
+                text = "Canal de ${station.title}",
+                style = MaterialTheme.typography.labelLarge,
+                color = MuteText,
+                modifier = Modifier.padding(top = 12.dp),
+            )
+            ChannelRow(
+                channels = station.channels,
+                selectedId = selectedId,
+                onSelect = onSelect,
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun LullabyPicker(
+    station: Station,
+    selectedId: String,
+    onSelect: (String) -> Unit,
+) {
+    val selectedChannel = station.channels.firstOrNull { it.id == selectedId }
+    var shelf by remember { mutableStateOf(selectedChannel?.lullabyShelf() ?: LullabyShelf.All) }
+    LaunchedEffect(selectedId) {
+        shelf = station.channels.firstOrNull { it.id == selectedId }?.lullabyShelf() ?: LullabyShelf.All
+    }
+    val mix = station.lullabyMix(shelf)
+    val infinite = station.lullabyInfinite()
+    val songs = station.lullabySongs(shelf)
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 12.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            LullabyShelf.entries.forEach { option ->
+                SleeperChip(
+                    label = option.title,
+                    selected = option == shelf,
+                    onClick = {
+                        shelf = option
+                        station.lullabyMix(option)?.let { onSelect(it.id) }
+                    },
+                )
+            }
+        }
+        if (mix != null) {
+            LullabyChoiceRow(
+                channel = mix,
+                selected = mix.id == selectedId,
+                onSelect = onSelect,
+            )
+        }
+        if (shelf == LullabyShelf.All && infinite != null) {
+            LullabyChoiceRow(
+                channel = infinite,
+                selected = infinite.id == selectedId,
+                onSelect = onSelect,
+            )
+        }
+        if (songs.isNotEmpty()) {
+            Text(
+                text = "O una nana",
+                style = MaterialTheme.typography.labelLarge,
+                color = MuteText,
+                modifier = Modifier.padding(top = 4.dp),
+            )
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                songs.forEach { channel ->
+                    LullabyChoiceRow(
+                        channel = channel,
+                        selected = channel.id == selectedId,
+                        onSelect = onSelect,
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun LullabyChoiceRow(
+    channel: Channel,
+    selected: Boolean,
+    onSelect: (String) -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(SleeperCardShape)
+            .background(if (selected) WarmGold else Color.White.copy(alpha = 0.08f))
+            .border(
+                1.dp,
+                if (selected) WarmGold else Color.White.copy(alpha = 0.14f),
+                SleeperCardShape,
+            )
+            .clickable { onSelect(channel.id) }
+            .padding(horizontal = 14.dp, vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        AppIcon(
+            resId = channel.iconRes,
+            contentDescription = channel.label,
+            modifier = Modifier.size(22.dp),
+        )
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = channel.label,
+                color = if (selected) NightNavy else Mist,
+                style = MaterialTheme.typography.titleSmall,
+            )
+            Text(
+                text = channel.hint,
+                color = if (selected) NightNavy.copy(alpha = 0.7f) else MuteText,
+                style = MaterialTheme.typography.bodySmall,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
         }
     }
 }
@@ -443,49 +581,22 @@ private fun ChannelRow(
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     items.forEach { channel ->
-                        ChannelChip(
-                            channel = channel,
+                        SleeperChip(
+                            label = channel.label,
                             selected = channel.id == selectedId,
-                            onSelect = onSelect,
+                            onClick = { onSelect(channel.id) },
+                            icon = {
+                                AppIcon(
+                                    resId = channel.iconRes,
+                                    contentDescription = channel.label,
+                                    modifier = Modifier.size(18.dp),
+                                )
+                            },
                         )
                     }
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun ChannelChip(
-    channel: Channel,
-    selected: Boolean,
-    onSelect: (String) -> Unit,
-) {
-    Row(
-        modifier = Modifier
-            .shadow(if (selected) 10.dp else 0.dp, RoundedCornerShape(50), clip = false)
-            .clip(RoundedCornerShape(50))
-            .background(if (selected) WarmGold else Color.White.copy(alpha = 0.08f))
-            .border(
-                1.dp,
-                if (selected) WarmGold else Color.White.copy(alpha = 0.18f),
-                RoundedCornerShape(50),
-            )
-            .clickable { onSelect(channel.id) }
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(6.dp),
-    ) {
-        AppIcon(
-            resId = channel.iconRes,
-            contentDescription = channel.label,
-            modifier = Modifier.size(18.dp),
-        )
-        Text(
-            text = channel.label,
-            color = if (selected) NightNavy else Mist,
-            style = MaterialTheme.typography.labelLarge,
-        )
     }
 }
 
@@ -509,32 +620,32 @@ private fun PlayerPanel(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .shadow(18.dp, RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp), clip = false)
-            .clip(RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp))
+            .shadow(18.dp, SleeperSheetShape, clip = false)
+            .clip(SleeperSheetShape)
             .background(
                 Brush.verticalGradient(listOf(Color(0xE8243A5C), Color(0xF2111C30))),
             )
             .border(
                 1.dp,
                 Brush.verticalGradient(listOf(Color.White.copy(alpha = 0.22f), Color.Transparent)),
-                RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
+                SleeperSheetShape,
             )
             .animateContentSize()
-            .padding(start = 20.dp, top = 10.dp, end = 20.dp, bottom = 14.dp),
+            .padding(start = 16.dp, top = 4.dp, end = 16.dp, bottom = 8.dp),
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(50))
+                .clip(SleeperChipShape)
                 .clickable(onClick = onToggleExpanded)
-                .padding(vertical = 4.dp),
+                .padding(vertical = 2.dp),
             contentAlignment = Alignment.Center,
         ) {
             AppIcon(
                 resId = AppIcons.chevronDown,
                 contentDescription = if (expanded) "Minimizar reproductor" else "Mostrar reproductor",
                 modifier = Modifier
-                    .size(28.dp)
+                    .size(20.dp)
                     .rotate(if (expanded) 0f else 180f),
             )
         }
@@ -596,7 +707,7 @@ private fun PlayerPanel(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 8.dp),
+                        .padding(vertical = 4.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
@@ -606,8 +717,8 @@ private fun PlayerPanel(
                     PlayButton(
                         isPlaying = state.isPlaying,
                         scale = scale,
-                        size = 76.dp,
-                        iconSize = if (state.isPlaying) 28.dp else 30.dp,
+                        size = 64.dp,
+                        iconSize = if (state.isPlaying) 24.dp else 26.dp,
                         onPlayRequest = onPlayRequest,
                     )
                     IconButton(onClick = { SleepRadioController.cycleChannel(1) }) {
@@ -633,7 +744,7 @@ private fun PlayerPanel(
                 }
                 Text("Temporizador", color = MuteText, style = MaterialTheme.typography.labelLarge)
                 TimerRow(selected = state.timerMinutes, remainingSeconds = state.remainingSeconds)
-                Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(4.dp))
                 Text("Volumen", color = MuteText, style = MaterialTheme.typography.labelLarge)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -660,7 +771,7 @@ private fun PlayerPanel(
                     text = footer,
                     color = MuteText,
                     style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 4.dp),
+                    modifier = Modifier.padding(bottom = 2.dp),
                 )
             }
         }
@@ -678,9 +789,9 @@ private fun MiniPlayerBar(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 4.dp),
+            .padding(bottom = 2.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         Column(
             modifier = Modifier
@@ -692,7 +803,7 @@ private fun MiniPlayerBar(
             Text(
                 text = if (isStory) "Biblioteca" else station.title,
                 color = WarmGold,
-                style = MaterialTheme.typography.labelLarge,
+                style = MaterialTheme.typography.labelSmall,
             )
             Text(
                 text = when {
@@ -701,47 +812,51 @@ private fun MiniPlayerBar(
                     else -> "Elige un canal"
                 },
                 color = Color.White,
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.bodyLarge,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
         }
-        IconButton(onClick = { SleepRadioController.cycleChannel(-1) }) {
-            AppIcon(AppIcons.previous, "Anterior", Modifier.size(22.dp))
+        IconButton(
+            onClick = { SleepRadioController.cycleChannel(-1) },
+            modifier = Modifier.size(36.dp),
+        ) {
+            AppIcon(AppIcons.previous, "Anterior", Modifier.size(18.dp))
         }
         PlayButton(
             isPlaying = state.isPlaying,
             scale = 1f,
-            size = 44.dp,
-            iconSize = if (state.isPlaying) 18.dp else 20.dp,
+            size = 36.dp,
+            iconSize = if (state.isPlaying) 16.dp else 18.dp,
             onPlayRequest = onPlayRequest,
         )
-        IconButton(onClick = { SleepRadioController.cycleChannel(1) }) {
-            AppIcon(AppIcons.next, "Siguiente", Modifier.size(22.dp))
+        IconButton(
+            onClick = { SleepRadioController.cycleChannel(1) },
+            modifier = Modifier.size(36.dp),
+        ) {
+            AppIcon(AppIcons.next, "Siguiente", Modifier.size(18.dp))
         }
         if (state.kind == PlaybackKind.Story) {
-            Text(
-                text = speedLabel(state.playbackSpeed),
-                color = NightNavy,
-                style = MaterialTheme.typography.labelLarge,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(50))
-                    .background(WarmGold)
-                    .clickable(onClick = SleepRadioController::cyclePlaybackSpeed)
-                    .padding(horizontal = 10.dp, vertical = 8.dp),
+            SleeperChip(
+                label = speedLabel(state.playbackSpeed),
+                selected = true,
+                onClick = SleepRadioController::cyclePlaybackSpeed,
             )
         }
-        IconButton(onClick = NightLightController::open) {
-            NightLightOrb()
+        IconButton(
+            onClick = NightLightController::open,
+            modifier = Modifier.size(36.dp),
+        ) {
+            NightLightOrb(size = 32.dp)
         }
     }
 }
 
 @Composable
-private fun NightLightOrb() {
+private fun NightLightOrb(size: Dp = 44.dp) {
     Box(
         modifier = Modifier
-            .size(44.dp)
+            .size(size)
             .shadow(8.dp, CircleShape, clip = false)
             .clip(CircleShape)
             .background(Brush.radialGradient(listOf(SoftPeach, WarmGold))),
@@ -750,7 +865,7 @@ private fun NightLightOrb() {
         Image(
             painter = painterResource(AppIcons.shush),
             contentDescription = "Luz nocturna",
-            modifier = Modifier.size(28.dp),
+            modifier = Modifier.size(size * 0.64f),
             contentScale = ContentScale.Fit,
         )
     }
@@ -791,21 +906,10 @@ private fun PlayButton(
 private fun SpeedRow(selected: Float) {
     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         SPEED_STEPS.forEach { speed ->
-            val isOn = selected == speed
-            Text(
-                text = speedLabel(speed),
-                color = if (isOn) NightNavy else Mist,
-                style = MaterialTheme.typography.labelLarge,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(50))
-                    .background(if (isOn) WarmGold else Color.White.copy(alpha = 0.06f))
-                    .border(
-                        1.dp,
-                        if (isOn) WarmGold else Color.White.copy(alpha = 0.22f),
-                        RoundedCornerShape(50),
-                    )
-                    .clickable { SleepRadioController.setPlaybackSpeed(speed) }
-                    .padding(horizontal = 12.dp, vertical = 7.dp),
+            SleeperChip(
+                label = speedLabel(speed),
+                selected = selected == speed,
+                onClick = { SleepRadioController.setPlaybackSpeed(speed) },
             )
         }
     }
@@ -825,20 +929,10 @@ private fun TimerRow(selected: Int?, remainingSeconds: Int?) {
                 "${minutes}m"
             }
             val isOn = selected == minutes
-            Text(
-                text = label,
-                color = if (isOn) NightNavy else Mist,
-                style = MaterialTheme.typography.labelLarge,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(50))
-                    .background(if (isOn) Lavender else Color.White.copy(alpha = 0.06f))
-                    .border(
-                        1.dp,
-                        if (isOn) Lavender else Color.White.copy(alpha = 0.22f),
-                        RoundedCornerShape(50),
-                    )
-                    .clickable { SleepRadioController.setTimerMinutes(minutes) }
-                    .padding(horizontal = 12.dp, vertical = 7.dp),
+            SleeperChip(
+                label = label,
+                selected = isOn,
+                onClick = { SleepRadioController.setTimerMinutes(minutes) },
             )
         }
     }

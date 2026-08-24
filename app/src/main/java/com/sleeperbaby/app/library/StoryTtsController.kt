@@ -35,7 +35,9 @@ object StoryTtsController {
     private var appContext: Context? = null
     private var player: MediaPlayer? = null
     private var pending: Story? = null
+    private var pendingNodeId: String? = null
     private var currentStory: Story? = null
+    private var currentNodeId: String? = null
     private var volume = 0.7f
     private var speed = 1f
 
@@ -43,16 +45,19 @@ object StoryTtsController {
         appContext = context.applicationContext
         mutableState.update { it.copy(status = StoryVoiceStatus.Idle, available = true) }
         val queued = pending
+        val queuedNode = pendingNodeId
         pending = null
+        pendingNodeId = null
         if (queued != null) {
-            play(queued)
+            play(queued, queuedNode)
         }
     }
 
-    fun play(story: Story) {
+    fun play(story: Story, nodeId: String? = null) {
         val context = appContext
         if (context == null) {
             pending = story
+            pendingNodeId = nodeId
             mutableState.update {
                 it.copy(status = StoryVoiceStatus.Preparing, storyId = story.id)
             }
@@ -60,6 +65,7 @@ object StoryTtsController {
         }
         stopInternal(clearStory = false)
         currentStory = story
+        currentNodeId = nodeId
         mutableState.update {
             it.copy(
                 status = StoryVoiceStatus.Preparing,
@@ -68,7 +74,7 @@ object StoryTtsController {
                 available = true,
             )
         }
-        startFile(context, story)
+        startFile(context, story, nodeId)
     }
 
     fun pause() {
@@ -82,7 +88,7 @@ object StoryTtsController {
         if (mutableState.value.status != StoryVoiceStatus.Paused) return
         val media = player
         if (media == null) {
-            play(story)
+            play(story, currentNodeId)
             return
         }
         media.setVolume(volume, volume)
@@ -93,12 +99,12 @@ object StoryTtsController {
         }
     }
 
-    fun toggle(story: Story) {
+    fun toggle(story: Story, nodeId: String? = null) {
         val current = mutableState.value
         when {
             current.status == StoryVoiceStatus.Playing && current.storyId == story.id -> pause()
             current.status == StoryVoiceStatus.Paused && current.storyId == story.id -> resume()
-            else -> play(story)
+            else -> play(story, nodeId)
         }
     }
 
@@ -127,8 +133,8 @@ object StoryTtsController {
         applySpeed(player)
     }
 
-    private fun startFile(context: Context, story: Story) {
-        val path = story.audioAssetPath()
+    private fun startFile(context: Context, story: Story, nodeId: String? = null) {
+        val path = story.audioAssetPath(nodeId)
         val descriptor = openStoryAsset(context, path)
         if (descriptor == null) {
             mutableState.update {
@@ -201,6 +207,7 @@ object StoryTtsController {
         }
         if (clearStory) {
             currentStory = null
+            currentNodeId = null
         }
     }
 }

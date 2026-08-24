@@ -31,7 +31,6 @@ object AppIcons {
     fun station(kind: StationKind): Int = when (kind) {
         StationKind.SoftNoise -> R.drawable.ic_station_noise
         StationKind.Lullaby -> R.drawable.ic_station_lullaby
-        StationKind.Frequency -> R.drawable.ic_station_frequency
         StationKind.CradleRhythm -> R.drawable.ic_station_rhythm
     }
 

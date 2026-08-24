@@ -24,6 +24,7 @@ VOICE = "es-ES-XimenaNeural"
 RATE = "-4%"
 PITCH = "+0Hz"
 MAX_CHARS = 4500
+CLOSING = "¡Buenas noches, chicos!"
 
 FILE_BY_ID = {
     "Caperucita": "caperucita",
@@ -38,7 +39,29 @@ FILE_BY_ID = {
     "Pulgarcito": "pulgarcito",
     "Soldadito": "soldadito",
     "Rapunzel": "rapunzel",
+    "NubeCohete": "nube_cohete",
+    "RobotDormilon": "robot_dormilon",
+    "EstrellaNavidad": "estrella_navidad",
+    "RenoCalcetin": "reno_calcetin",
+    "CapitanLuciernaga": "capitan_luciernaga",
+    "Superabuela": "superabuela",
+    "BosqueSusurros": "bosque_susurros",
+    "PrincesaNube": "princesa_nube",
+    "GuillePirata": "guille_pirata",
+    "TesoroGalleta": "tesoro_galleta",
+    "IslaSiesta": "isla_siesta",
+    "DueloCumplidos": "duelo_cumplidos",
+    "GuilleElige": "guille_elige",
+    "EstrellaElige": "estrella_elige",
+    "NinoElige": "nino_elige",
 }
+
+NODE_RE = re.compile(
+    r"StoryNode\(\s*// audio:(?P<file>\w+)\s*id = \"(?P<id>[^\"]+)\","
+    r"\s*paragraphs = listOf\((?P<body>.*?)\n\s*\),"
+    r"(?:\s*question = \"(?P<question>[^\"]+)\",)?",
+    re.S,
+)
 
 STORY_RE = re.compile(
     r"Story\(\s*id = StoryId\.(?P<id>\w+),\s*title = \"(?P<title>[^\"]+)\",.*?"
@@ -64,14 +87,16 @@ def normalize(text: str) -> str:
 def parse_catalog(path: Path) -> list[dict]:
     source = path.read_text(encoding="utf-8")
     stories: list[dict] = []
+    titles: dict[str, str] = {}
     for match in STORY_RE.finditer(source):
         story_id = match.group("id")
         title = match.group("title")
         paragraphs = [unescape(item) for item in STRING_RE.findall(match.group("body"))]
-        narration = normalize(f"{title}. {' '.join(paragraphs)} Buenas noches.")
+        narration = normalize(f"{title}. {' '.join(paragraphs)} {CLOSING}")
         file_stem = FILE_BY_ID.get(story_id)
         if not file_stem:
             raise SystemExit(f"Falta nombre de audio para {story_id}")
+        titles[file_stem] = title
         stories.append(
             {
                 "id": story_id,
@@ -82,7 +107,36 @@ def parse_catalog(path: Path) -> list[dict]:
         )
     if len(stories) != len(FILE_BY_ID):
         raise SystemExit(f"Se esperaban {len(FILE_BY_ID)} cuentos, hay {len(stories)}")
-    return stories
+
+    nodes: list[dict] = []
+    for match in NODE_RE.finditer(source):
+        file_stem = match.group("file")
+        paragraphs = [unescape(item) for item in STRING_RE.findall(match.group("body"))]
+        question = match.group("question")
+        is_start = file_stem in FILE_BY_ID.values()
+        parts: list[str] = []
+        if is_start:
+            parts.append(f"{titles.get(file_stem, '')}.")
+        parts.extend(paragraphs)
+        if question:
+            parts.append(question)
+        else:
+            parts.append(CLOSING)
+        nodes.append(
+            {
+                "id": match.group("id"),
+                "title": next(
+                    (titles[stem] for stem in sorted(titles, key=len, reverse=True) if file_stem == stem or file_stem.startswith(f"{stem}_")),
+                    file_stem,
+                ),
+                "file": f"{file_stem}.mp3",
+                "text": normalize(" ".join(parts)),
+            }
+        )
+
+    covered = {item["file"] for item in nodes}
+    linear = [item for item in stories if item["file"] not in covered]
+    return linear + nodes
 
 
 def chunk_text(text: str, max_len: int = MAX_CHARS) -> list[str]:
