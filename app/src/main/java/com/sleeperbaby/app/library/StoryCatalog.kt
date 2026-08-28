@@ -228,7 +228,8 @@ object StoryCatalog {
             title = "El soldadito de plomo",
             origin = "Hans Christian Andersen",
             teaser = "Un soldadito de una sola pierna se enamora de una bailarina de papel y viaja con el río.",
-            coverColor = 0xFF5A3D3D,
+            coverColor = 0xFF8C3D3A,
+            coverArt = R.drawable.ill_soldadito,
             shelves = setOf(StoryShelf.Classic, StoryShelf.Magic),
             paragraphs = listOf(
                 "Entre muchos soldaditos de plomo había uno distinto: le faltaba una pierna, porque el plomo no alcanzó para el último. Él no se quejaba. Lo colocaron al borde de la caja, de pie, mirando siempre a una bailarina de papel que tenía una pierna levantada, tan quieta y valiente como él.",
@@ -248,7 +249,8 @@ object StoryCatalog {
             title = "Rapunzel",
             origin = "Cuento tradicional",
             teaser = "Una muchacha de trenza larguísima espera en una torre y encuentra compañía.",
-            coverColor = 0xFF5A4A5A,
+            coverColor = 0xFFC9A24A,
+            coverArt = R.drawable.ill_rapunzel,
             shelves = setOf(StoryShelf.Classic, StoryShelf.Princesses, StoryShelf.Magic),
             paragraphs = listOf(
                 "Rapunzel vivía en una torre sin escalera. Las paredes eran lisas como un vaso. Su trenza era tan larga que bajaba por la ventana como una cuerda de oro, y olía a sol aunque ella viera poco patio. Quien quería subir decía: «Rapunzel, Rapunzel, deja caer tu pelo».",
@@ -270,6 +272,7 @@ object StoryCatalog {
             origin = "Cuento original",
             teaser = "Un niño sube a una nube que viaja despacio a contar estrellas.",
             coverColor = 0xFF3A4A6B,
+            coverArt = R.drawable.ill_nube_cohete,
             shelves = setOf(StoryShelf.Modern),
             paragraphs = listOf(
                 "Leo se asomó a la ventana cuando ya era hora de dormir. El cielo estaba tan quieto que parecía de algodón. Entonces una nube baja, redonda y suave, se acercó al alféizar como si llamara con los nudillos. —¿Vienes? —dijo, con voz de lluvia fina—. No corro. Solo cuento estrellas.",
@@ -289,7 +292,8 @@ object StoryCatalog {
             title = "El robot dormilón",
             origin = "Cuento original",
             teaser = "Un robot pequeño aprende a apagar las luces y a quedarse quieto.",
-            coverColor = 0xFF3D5A5A,
+            coverColor = 0xFF7A8BA3,
+            coverArt = R.drawable.ill_robot_dormilon,
             shelves = setOf(StoryShelf.Modern),
             paragraphs = listOf(
                 "En un piso del quinto vivía Nino, un robot del tamaño de una caja de zapatos. Tenía rueditas suaves, dos ojitos redondos y un botón en la cabeza que decía «ON». El problema era que Nino no encontraba el «OFF». Por las noches seguía encendido, pitando bajito, como un grillo de metal.",
@@ -309,7 +313,8 @@ object StoryCatalog {
             title = "La estrella que se perdió",
             origin = "Cuento original",
             teaser = "Una estrella baja el 24 y busca el árbol que la espera.",
-            coverColor = 0xFF5A3D4A,
+            coverColor = 0xFFD4B84A,
+            coverArt = R.drawable.ill_estrella_navidad,
             shelves = setOf(StoryShelf.Christmas, StoryShelf.Magic),
             paragraphs = listOf(
                 "La víspera de Navidad, una estrella pequeña se soltó del cielo. No por enfado. Por curiosidad. Había visto, desde arriba, miles de arbolitos con luces, y quiso saber cómo se siente uno cuando te ponen en la punta, tan alto y tan en casa a la vez.",

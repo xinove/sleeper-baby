@@ -8,10 +8,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.DirectionsWalk
@@ -71,7 +72,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.sleeperbaby.app.library.STORY_CLOSING
+import com.sleeperbaby.app.R
 import com.sleeperbaby.app.library.Story
 import com.sleeperbaby.app.library.StoryCatalog
 import com.sleeperbaby.app.library.StoryId
@@ -79,8 +80,7 @@ import com.sleeperbaby.app.library.StoryLibraryController
 import com.sleeperbaby.app.library.StoryShelf
 import com.sleeperbaby.app.library.StoryTtsController
 import com.sleeperbaby.app.library.StoryVoiceStatus
-import com.sleeperbaby.app.library.matchesShelf
-import com.sleeperbaby.app.library.storyShelvesOf
+import com.sleeperbaby.app.library.STORY_CLOSING
 import com.sleeperbaby.app.ui.theme.Ink
 import com.sleeperbaby.app.ui.theme.Mist
 import com.sleeperbaby.app.ui.theme.MuteText
@@ -174,7 +174,15 @@ fun LibraryOverlay(bottomPadding: Dp = 108.dp) {
     val todayTale = StoryLibraryController.todayTale()
     val todayAdventure = StoryLibraryController.todayAdventure()
     val hint by StoryLibraryController.lockedHint.collectAsStateWithLifecycle()
-    BackHandler { StoryLibraryController.closeLibrary() }
+    var browse by remember { mutableStateOf<LibraryBrowse>(LibraryBrowse.Home) }
+    val atHome = browse is LibraryBrowse.Home
+    BackHandler {
+        if (atHome) {
+            StoryLibraryController.closeLibrary()
+        } else {
+            browse = LibraryBrowse.Home
+        }
+    }
     LaunchedEffect(hint) {
         if (hint != null) {
             delay(2200)
@@ -194,65 +202,45 @@ fun LibraryOverlay(bottomPadding: Dp = 108.dp) {
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             OverlayBar(
-                title = "Biblioteca",
-                subtitle = "Hoy: ${todayTale.title} · ${todayAdventure.title}",
-                onClose = StoryLibraryController::closeLibrary,
-                closeLabel = "Cerrar biblioteca",
+                title = when (val room = browse) {
+                    LibraryBrowse.Home -> "Biblioteca"
+                    LibraryBrowse.Adventures -> "Decide tu aventura"
+                    is LibraryBrowse.Section -> room.shelf.title
+                },
+                subtitle = if (atHome) {
+                    "Toca un libro para entrar"
+                } else {
+                    "Hoy: ${todayTale.title} · ${todayAdventure.title}"
+                },
+                onClose = {
+                    if (atHome) {
+                        StoryLibraryController.closeLibrary()
+                    } else {
+                        browse = LibraryBrowse.Home
+                    }
+                },
+                closeLabel = if (atHome) "Cerrar biblioteca" else "Volver a la estantería",
             )
-            var kind by remember { mutableStateOf(LibraryKind.Tales) }
-            var taleShelf by remember { mutableStateOf(StoryShelf.All) }
-            var adventureShelf by remember { mutableStateOf(StoryShelf.All) }
             val todayIds = setOf(todayTale.id, todayAdventure.id)
-            val shelves = storyShelvesOf(
-                if (kind == LibraryKind.Tales) StoryCatalog.tales else StoryCatalog.adventures,
-            )
-            val selectedShelf = if (kind == LibraryKind.Tales) taleShelf else adventureShelf
-            val stories = if (kind == LibraryKind.Tales) {
-                StoryCatalog.tales.filter { it.matchesShelf(taleShelf) }
-            } else {
-                StoryCatalog.adventures.filter { it.matchesShelf(adventureShelf) }
-            }
             Column(
                 modifier = Modifier
                     .weight(1f)
                     .verticalScroll(rememberScrollState())
                     .padding(horizontal = 20.dp, vertical = 8.dp),
             ) {
-                SleeperSegmented(
-                    options = LibraryKind.entries.map { it.title },
-                    selectedIndex = kind.ordinal,
-                    onSelect = { kind = LibraryKind.entries[it] },
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                StoryShelfRow(
-                    options = shelves,
-                    selected = selectedShelf,
-                    onSelect = { shelf ->
-                        if (kind == LibraryKind.Tales) taleShelf = shelf else adventureShelf = shelf
-                    },
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                stories.chunked(3).forEach { row ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 10.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    ) {
-                        row.forEach { story ->
-                            val unlocked = StoryLibraryController.isUnlocked(story)
-                            StoryCoverCard(
-                                story = story,
-                                isToday = unlocked && story.id in todayIds,
-                                locked = !unlocked,
-                                modifier = Modifier.weight(1f),
-                                onClick = { StoryLibraryController.open(story) },
-                            )
-                        }
-                        repeat(3 - row.size) {
-                            Spacer(modifier = Modifier.weight(1f))
-                        }
-                    }
+                when (val room = browse) {
+                    LibraryBrowse.Home -> LibraryShelfHome(
+                        onOpenSection = { browse = LibraryBrowse.Section(it) },
+                        onOpenAdventures = { browse = LibraryBrowse.Adventures },
+                    )
+                    LibraryBrowse.Adventures -> StoryGrid(
+                        stories = StoryCatalog.adventures,
+                        todayIds = todayIds,
+                    )
+                    is LibraryBrowse.Section -> StoryGrid(
+                        stories = StoryCatalog.stories.filter { room.shelf in it.shelves },
+                        todayIds = todayIds,
+                    )
                 }
             }
         }
@@ -274,9 +262,179 @@ fun LibraryOverlay(bottomPadding: Dp = 108.dp) {
     }
 }
 
-private enum class LibraryKind(val title: String) {
-    Tales("Cuentos"),
-    Adventures("Decide tu aventura"),
+private sealed class LibraryBrowse {
+    data object Home : LibraryBrowse()
+    data object Adventures : LibraryBrowse()
+    data class Section(val shelf: StoryShelf) : LibraryBrowse()
+}
+
+private val librarySections = listOf(
+    StoryShelf.Classic,
+    StoryShelf.Modern,
+    StoryShelf.Christmas,
+    StoryShelf.Heroes,
+    StoryShelf.Magic,
+    StoryShelf.Princesses,
+    StoryShelf.Pirates,
+)
+
+@Composable
+private fun LibraryShelfHome(
+    onOpenSection: (StoryShelf) -> Unit,
+    onOpenAdventures: () -> Unit,
+) {
+    Text(
+        text = "Elige una estantería",
+        color = MuteText,
+        style = MaterialTheme.typography.bodyMedium,
+        modifier = Modifier.padding(bottom = 12.dp),
+    )
+    val rows = (librarySections + null).chunked(2)
+    rows.forEachIndexed { index, row ->
+        ShelfRow {
+            row.forEach { shelf ->
+                if (shelf == null) {
+                    ShelfBook(
+                        title = "Aventuras",
+                        art = null,
+                        onClick = onOpenAdventures,
+                        modifier = Modifier.weight(1f),
+                    )
+                } else {
+                    ShelfBook(
+                        title = shelf.title,
+                        art = shelfArt(shelf),
+                        onClick = { onOpenSection(shelf) },
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+            }
+            if (row.size == 1) {
+                Spacer(modifier = Modifier.weight(1f))
+            }
+        }
+        WoodPlank()
+        if (index != rows.lastIndex) {
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+    }
+}
+
+@Composable
+private fun ShelfRow(content: @Composable RowScope.() -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        verticalAlignment = Alignment.Bottom,
+        content = content,
+    )
+}
+
+@Composable
+private fun ShelfBook(
+    title: String,
+    art: Int?,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier.clickable(onClick = onClick),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(0.72f)
+                .clip(RoundedCornerShape(10.dp))
+                .background(Color(0xFF2A1C14))
+                .border(1.dp, Color.White.copy(alpha = 0.16f), RoundedCornerShape(10.dp)),
+            contentAlignment = Alignment.Center,
+        ) {
+            if (art != null) {
+                Image(
+                    painter = painterResource(art),
+                    contentDescription = title,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Fit,
+                )
+            } else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Brush.verticalGradient(listOf(SoftPeach, WarmGold))),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    AppIcon(
+                        resId = AppIcons.library,
+                        contentDescription = title,
+                        modifier = Modifier.size(32.dp),
+                    )
+                }
+            }
+        }
+        Text(
+            text = title,
+            color = Mist,
+            style = MaterialTheme.typography.labelLarge,
+            textAlign = TextAlign.Center,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(top = 6.dp, bottom = 4.dp),
+        )
+    }
+}
+
+@Composable
+private fun WoodPlank() {
+    Image(
+        painter = painterResource(R.drawable.ill_shelf_wood),
+        contentDescription = null,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(16.dp)
+            .clip(SleeperCoverShape),
+        contentScale = ContentScale.Crop,
+    )
+}
+
+@Composable
+private fun StoryGrid(
+    stories: List<Story>,
+    todayIds: Set<StoryId>,
+) {
+    stories.chunked(2).forEach { row ->
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 10.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            row.forEach { story ->
+                val unlocked = StoryLibraryController.isUnlocked(story)
+                StoryCoverCard(
+                    story = story,
+                    isToday = unlocked && story.id in todayIds,
+                    locked = !unlocked,
+                    modifier = Modifier.weight(1f),
+                    onClick = { StoryLibraryController.open(story) },
+                )
+            }
+            repeat(2 - row.size) {
+                Spacer(modifier = Modifier.weight(1f))
+            }
+        }
+    }
+}
+
+private fun shelfArt(shelf: StoryShelf): Int = when (shelf) {
+    StoryShelf.All -> R.drawable.ic_library
+    StoryShelf.Classic -> R.drawable.ill_shelf_classic
+    StoryShelf.Modern -> R.drawable.ill_shelf_modern
+    StoryShelf.Christmas -> R.drawable.ill_shelf_christmas
+    StoryShelf.Heroes -> R.drawable.ill_shelf_heroes
+    StoryShelf.Magic -> R.drawable.ill_shelf_magic
+    StoryShelf.Princesses -> R.drawable.ill_shelf_princesses
+    StoryShelf.Pirates -> R.drawable.ill_shelf_pirates
 }
 
 @Composable
@@ -295,7 +453,7 @@ private fun StoryCoverCard(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(120.dp)
+                .aspectRatio(1f)
                 .clip(SleeperCoverShape)
                 .then(
                     if (story.coverArt != null) {
@@ -674,28 +832,6 @@ fun StoryReaderOverlay(bottomPadding: Dp = 108.dp) {
                     )
                 }
             }
-        }
-    }
-}
-
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-private fun StoryShelfRow(
-    options: List<StoryShelf>,
-    selected: StoryShelf,
-    onSelect: (StoryShelf) -> Unit,
-) {
-    FlowRow(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        options.forEach { option ->
-            SleeperChip(
-                label = option.title,
-                selected = option == selected,
-                onClick = { onSelect(option) },
-            )
         }
     }
 }

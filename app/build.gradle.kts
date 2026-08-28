@@ -6,14 +6,14 @@ plugins {
 
 android {
     namespace = "com.sleeperbaby.app"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.sleeperbaby.app"
         minSdk = 26
-        targetSdk = 35
-        versionCode = 2
-        versionName = "1.0.1"
+        targetSdk = 36
+        versionCode = 3
+        versionName = "1.0.2"
 
         manifestPlaceholders["admobAppId"] = "ca-app-pub-1500150166852996~1158458948"
     }
