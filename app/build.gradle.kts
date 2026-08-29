@@ -30,7 +30,8 @@ android {
                 "proguard-rules.pro",
             )
             ndk {
-                // Empaqueta símbolos nativos en el AAB para ANR y crashes en Play Console.
+                // Solo ARM: Play deja de generar artefactos x86/x86_64 que inflan la descarga.
+                abiFilters += listOf("armeabi-v7a", "arm64-v8a")
                 debugSymbolLevel = "SYMBOL_TABLE"
             }
             manifestPlaceholders["admobAppId"] = "ca-app-pub-1500150166852996~1158458948"
@@ -54,6 +55,12 @@ android {
     lint {
         // Android Studio writes unescaped Windows paths in local.properties.
         disable += "PropertyEscape"
+    }
+
+    bundle {
+        abi { enableSplit = true }
+        density { enableSplit = true }
+        language { enableSplit = true }
     }
 }
 
