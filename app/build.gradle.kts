@@ -12,8 +12,8 @@ android {
         applicationId = "com.sleeperbaby.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.0.2"
+        versionCode = 4
+        versionName = "1.0.3"
 
         manifestPlaceholders["admobAppId"] = "ca-app-pub-1500150166852996~1158458948"
     }

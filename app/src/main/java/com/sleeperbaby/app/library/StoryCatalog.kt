@@ -355,6 +355,7 @@ object StoryCatalog {
             origin = "Cuento original",
             teaser = "Un héroe de luz suave ilumina el pasillo sin despertar a nadie.",
             coverColor = 0xFF3D4A3A,
+            coverArt = R.drawable.ill_capitan_luciernaga,
             shelves = setOf(StoryShelf.Heroes, StoryShelf.Magic),
             paragraphs = listOf(
                 "No todos los superhéroes llevan capa ruidosa. El Capitán Luciérnaga lleva una chaqueta que brilla como un frasco de luces. No vuela a romper nubes. Vuela a la altura de las cunas, para que el pasillo no esté tan oscuro cuando alguien va al baño.",
@@ -375,6 +376,7 @@ object StoryCatalog {
             origin = "Cuento original",
             teaser = "Una abuela con capa de merienda resuelve los problemas de la tarde.",
             coverColor = 0xFF6B4A3A,
+            coverArt = R.drawable.ill_superabuela,
             shelves = setOf(StoryShelf.Heroes),
             paragraphs = listOf(
                 "La Superabuela no salió de un cómic. Salió de un delantal. Su capa es de cuadros, huele a merienda, y el superpoder principal es llegar justo cuando el yogur se está a punto de caer. También sabe encontrar gafas, mandos y el nombre de ese primo que nadie recuerda.",
@@ -515,6 +517,7 @@ object StoryCatalog {
             origin = "Aventura para elegir",
             teaser = "Paytus y Helen hallan un mapa. Pregunta: ¿muelle o playa?",
             coverColor = 0xFF3A4F5A,
+            coverArt = R.drawable.ill_guille_elige,
             shelves = setOf(StoryShelf.Pirates),
             paragraphs = listOf(
                 "Paytus Tridwood encontró en el muelle una botella. Dentro no había un genio. Había un mapa dibujado con miga de galleta. Dos caminos: uno hacia las cuerdas, otro hacia la arena.",
@@ -602,6 +605,7 @@ object StoryCatalog {
             origin = "Aventura para elegir",
             teaser = "Una estrella se perdió. Pregunta: ¿seguimos la canela o al gato?",
             coverColor = 0xFF5A3D4A,
+            coverArt = R.drawable.ill_estrella_elige,
             shelves = setOf(StoryShelf.Christmas, StoryShelf.Magic),
             paragraphs = listOf(
                 "Una estrella pequeña bajó a la calle, despacio, para no asustar a los tejados. El farol le dijo: hay dos olores de camino. Uno a canela. Otro a gato con lazo.",

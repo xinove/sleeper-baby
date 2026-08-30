@@ -225,7 +225,7 @@ object SleepRadioController {
                     mutableState.update { it.copy(isPlaying = true, isActive = true) }
                     restartTimerIfNeeded()
                 } else {
-                    playStory(story)
+                    playStory(story, StoryTtsController.activeNodeId())
                 }
             }
         }

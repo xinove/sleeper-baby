@@ -13,6 +13,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 object StoryLibraryController {
+    /** Temporal: quitar o poner a false antes de publicar. */
+    private const val UNLOCK_ALL_STORIES = true
+
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private lateinit var store: DailyStoryStore
     private var popupJob: Job? = null
@@ -59,17 +62,26 @@ object StoryLibraryController {
     fun todayStories(): List<Story> = listOf(todayTale(), todayAdventure())
 
     fun unlockedCount(): Int =
-        if (::store.isInitialized) store.unlockedCount() else 2
+        if (UNLOCK_ALL_STORIES) {
+            StoryCatalog.stories.size
+        } else if (::store.isInitialized) {
+            store.unlockedCount()
+        } else {
+            2
+        }
 
-    fun isUnlocked(story: Story): Boolean =
-        if (::store.isInitialized) {
+    fun isUnlocked(story: Story): Boolean {
+        if (UNLOCK_ALL_STORIES) return true
+        return if (::store.isInitialized) {
             store.isUnlocked(story)
         } else {
             story.id == StoryCatalog.tales.first().id ||
                 story.id == StoryCatalog.adventures.first().id
         }
+    }
 
-    fun unlockedStories(): List<Story> = todayStories()
+    fun unlockedStories(): List<Story> =
+        if (UNLOCK_ALL_STORIES) StoryCatalog.stories else todayStories()
 
     fun openTodayGift() {
         mutableShowPopup.value = true

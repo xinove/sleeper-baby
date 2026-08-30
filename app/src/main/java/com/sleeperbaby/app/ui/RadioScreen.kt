@@ -312,35 +312,8 @@ private fun StationCard(
         }
         val trailing = station.trailingArt
         if (trailing != null) {
-            StationArtCircle(artRes = trailing, selected = selected)
+            SleeperArtCircle(artRes = trailing, selected = selected)
         }
-    }
-}
-
-@Composable
-private fun StationArtCircle(
-    artRes: Int,
-    selected: Boolean,
-) {
-    Box(
-        modifier = Modifier
-            .size(88.dp)
-            .clip(CircleShape)
-            .background(Color(0xFF1A3358))
-            .border(
-                1.5.dp,
-                if (selected) WarmGold.copy(alpha = 0.8f) else Color.White.copy(alpha = 0.28f),
-                CircleShape,
-            ),
-        contentAlignment = Alignment.Center,
-    ) {
-        Image(
-            painter = painterResource(artRes),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop,
-            alignment = Alignment.Center,
-        )
     }
 }
 
@@ -355,18 +328,18 @@ private fun NightLightCard() {
             .padding(18.dp),
     ) {
         Row(
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             SleeperIconWell {
-                Image(
-                    painter = painterResource(AppIcons.shush),
+                AppIcon(
+                    resId = AppIcons.nightLight,
                     contentDescription = "Luz nocturna",
-                    modifier = Modifier.size(32.dp),
-                    contentScale = ContentScale.Fit,
+                    modifier = Modifier.size(26.dp),
                 )
             }
-            Column {
+            Column(modifier = Modifier.weight(1f)) {
                 Text("Luz nocturna", style = MaterialTheme.typography.titleMedium, color = Color.White)
                 Text(
                     text = "Lámpara suave o siluetas en la pared",
@@ -374,6 +347,7 @@ private fun NightLightCard() {
                     color = MuteText,
                 )
             }
+            SleeperArtCircle(artRes = AppIcons.nightLightArt)
         }
         FlowRow(
             modifier = Modifier.padding(top = 12.dp),
@@ -862,11 +836,10 @@ private fun NightLightOrb(size: Dp = 44.dp) {
             .background(Brush.radialGradient(listOf(SoftPeach, WarmGold))),
         contentAlignment = Alignment.Center,
     ) {
-        Image(
-            painter = painterResource(AppIcons.shush),
+        AppIcon(
+            resId = AppIcons.nightLight,
             contentDescription = "Luz nocturna",
-            modifier = Modifier.size(size * 0.64f),
-            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(size * 0.52f),
         )
     }
 }

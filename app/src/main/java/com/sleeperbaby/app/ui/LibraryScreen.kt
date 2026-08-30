@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -127,13 +126,7 @@ fun LibrarySection() {
                 modifier = Modifier.padding(top = 4.dp),
             )
         }
-        SleeperIconWell {
-            AppIcon(
-                resId = AppIcons.gift,
-                contentDescription = null,
-                modifier = Modifier.size(22.dp),
-            )
-        }
+        SleeperArtCircle(artRes = AppIcons.libraryArt)
     }
 }
 
@@ -208,7 +201,7 @@ fun LibraryOverlay(bottomPadding: Dp = 108.dp) {
                     is LibraryBrowse.Section -> room.shelf.title
                 },
                 subtitle = if (atHome) {
-                    "Toca un libro para entrar"
+                    "Elige una estantería"
                 } else {
                     "Hoy: ${todayTale.title} · ${todayAdventure.title}"
                 },
@@ -278,62 +271,54 @@ private val librarySections = listOf(
     StoryShelf.Pirates,
 )
 
+private val LibraryTileShape = RoundedCornerShape(28.dp)
+
+private data class ShelfTile(
+    val title: String,
+    val art: Int,
+    val onClick: () -> Unit,
+)
+
 @Composable
 private fun LibraryShelfHome(
     onOpenSection: (StoryShelf) -> Unit,
     onOpenAdventures: () -> Unit,
 ) {
     Text(
-        text = "Elige una estantería",
+        text = "Toca una estantería para entrar",
         color = MuteText,
         style = MaterialTheme.typography.bodyMedium,
-        modifier = Modifier.padding(bottom = 12.dp),
+        modifier = Modifier.padding(bottom = 14.dp),
     )
-    val rows = (librarySections + null).chunked(2)
-    rows.forEachIndexed { index, row ->
-        ShelfRow {
-            row.forEach { shelf ->
-                if (shelf == null) {
-                    ShelfBook(
-                        title = "Aventuras",
-                        art = null,
-                        onClick = onOpenAdventures,
-                        modifier = Modifier.weight(1f),
-                    )
-                } else {
-                    ShelfBook(
-                        title = shelf.title,
-                        art = shelfArt(shelf),
-                        onClick = { onOpenSection(shelf) },
-                        modifier = Modifier.weight(1f),
-                    )
-                }
+    val tiles = librarySections.map { shelf ->
+        ShelfTile(shelf.title, shelfArt(shelf)) { onOpenSection(shelf) }
+    } + ShelfTile("Aventuras", AppIcons.libraryArt, onOpenAdventures)
+    tiles.chunked(2).forEach { row ->
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
+        ) {
+            row.forEach { tile ->
+                ShelfBook(
+                    title = tile.title,
+                    art = tile.art,
+                    onClick = tile.onClick,
+                    modifier = Modifier.weight(1f),
+                )
             }
             if (row.size == 1) {
                 Spacer(modifier = Modifier.weight(1f))
             }
         }
-        WoodPlank()
-        if (index != rows.lastIndex) {
-            Spacer(modifier = Modifier.height(16.dp))
-        }
     }
-}
-
-@Composable
-private fun ShelfRow(content: @Composable RowScope.() -> Unit) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        verticalAlignment = Alignment.Bottom,
-        content = content,
-    )
 }
 
 @Composable
 private fun ShelfBook(
     title: String,
-    art: Int?,
+    art: Int,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -344,57 +329,29 @@ private fun ShelfBook(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(0.72f)
-                .clip(RoundedCornerShape(10.dp))
-                .background(Color(0xFF2A1C14))
-                .border(1.dp, Color.White.copy(alpha = 0.16f), RoundedCornerShape(10.dp)),
-            contentAlignment = Alignment.Center,
+                .aspectRatio(1f)
+                .clip(LibraryTileShape)
+                .background(Color(0xFF1A3358))
+                .border(1.5.dp, Color.White.copy(alpha = 0.22f), LibraryTileShape),
         ) {
-            if (art != null) {
-                Image(
-                    painter = painterResource(art),
-                    contentDescription = title,
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Fit,
-                )
-            } else {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Brush.verticalGradient(listOf(SoftPeach, WarmGold))),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    AppIcon(
-                        resId = AppIcons.library,
-                        contentDescription = title,
-                        modifier = Modifier.size(32.dp),
-                    )
-                }
-            }
+            Image(
+                painter = painterResource(art),
+                contentDescription = title,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center,
+            )
         }
         Text(
             text = title,
             color = Mist,
-            style = MaterialTheme.typography.labelLarge,
+            style = MaterialTheme.typography.titleSmall,
             textAlign = TextAlign.Center,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(top = 6.dp, bottom = 4.dp),
+            modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
         )
     }
-}
-
-@Composable
-private fun WoodPlank() {
-    Image(
-        painter = painterResource(R.drawable.ill_shelf_wood),
-        contentDescription = null,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(16.dp)
-            .clip(SleeperCoverShape),
-        contentScale = ContentScale.Crop,
-    )
 }
 
 @Composable
@@ -454,7 +411,7 @@ private fun StoryCoverCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
-                .clip(SleeperCoverShape)
+                .clip(LibraryTileShape)
                 .then(
                     if (story.coverArt != null) {
                         Modifier.background(cover)
@@ -467,9 +424,9 @@ private fun StoryCoverCard(
                     },
                 )
                 .border(
-                    1.dp,
+                    1.5.dp,
                     if (isToday) WarmGold else Color.White.copy(alpha = 0.22f),
-                    SleeperCoverShape,
+                    LibraryTileShape,
                 ),
         ) {
             val art = story.coverArt
@@ -700,8 +657,12 @@ fun StoryReaderOverlay(bottomPadding: Dp = 108.dp) {
     var nodeId by remember(current.id) { mutableStateOf(adventure?.startId.orEmpty()) }
     val node = adventure?.node(nodeId)
     val voice by StoryTtsController.state.collectAsStateWithLifecycle()
-    val listening = voice.storyId == current.id &&
+    val listeningNow = voice.storyId == current.id &&
         voice.status != StoryVoiceStatus.Idle
+    var keepListening by remember(current.id) { mutableStateOf(false) }
+    LaunchedEffect(listeningNow) {
+        if (listeningNow) keepListening = true
+    }
     val scroll = rememberScrollState()
     LaunchedEffect(nodeId) { scroll.animateScrollTo(0) }
     BackHandler { StoryLibraryController.closeReader() }
@@ -799,7 +760,7 @@ fun StoryReaderOverlay(bottomPadding: Dp = 108.dp) {
                             .background(WarmGold)
                             .clickable {
                                 nodeId = choice.nextId
-                                if (listening) {
+                                if (keepListening || listeningNow) {
                                     StoryLibraryController.openAndListen(current, choice.nextId)
                                 }
                             }
@@ -824,7 +785,7 @@ fun StoryReaderOverlay(bottomPadding: Dp = 108.dp) {
                             .background(WarmGold)
                             .clickable {
                                 nodeId = adventure.startId
-                                if (listening) {
+                                if (keepListening || listeningNow) {
                                     StoryLibraryController.openAndListen(current, adventure.startId)
                                 }
                             }

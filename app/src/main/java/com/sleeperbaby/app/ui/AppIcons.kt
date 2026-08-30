@@ -20,10 +20,11 @@ import com.sleeperbaby.app.playback.NightLightMode
  *   ic_station_frequency.png círculos concéntricos
  *   ic_station_rhythm.png    nube / ritmo
  *   ic_library.png           libro abierto
+ *   ill_library.png          búho dormido sobre libros (tarjeta Biblioteca)
  *   ic_gift.png              caja de regalo (popup diario)
  *   ic_lock.png              candado
  *   ic_play.png              triángulo de play
- *   ill_shush.png            cara de bebé (luz nocturna)
+ *   ill_night_light.png      osito y luna (tarjeta Luz nocturna)
  *
  * Ilustraciones a la derecha (ya están): ill_koala, ill_fox, ill_sloth, ill_seahorses.
  */
@@ -44,7 +45,6 @@ object AppIcons {
     val nightLight = R.drawable.ic_night_light
     val play = R.drawable.ic_play
     val playBaby = R.drawable.ic_play_baby
-    val shush = R.drawable.ill_shush
     val pause = R.drawable.ic_pause
     val stop = R.drawable.ic_stop
     val previous = R.drawable.ic_prev
@@ -53,6 +53,8 @@ object AppIcons {
     val volumeStar = R.drawable.ic_night_stars
     val chevronDown = R.drawable.ic_chevron_down
     val library = R.drawable.ic_library
+    val libraryArt = R.drawable.ill_library
+    val nightLightArt = R.drawable.ill_night_light
     val listen = R.drawable.ic_listen
     val lock = R.drawable.ic_lock
     val gift = R.drawable.ic_gift

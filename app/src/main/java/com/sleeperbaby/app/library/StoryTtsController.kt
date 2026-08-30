@@ -99,6 +99,8 @@ object StoryTtsController {
         }
     }
 
+    fun activeNodeId(): String? = currentNodeId
+
     fun toggle(story: Story, nodeId: String? = null) {
         val current = mutableState.value
         when {
@@ -152,8 +154,15 @@ object StoryTtsController {
                 .build(),
         )
         media.setVolume(volume, volume)
+        fun closeDescriptor() {
+            runCatching { descriptor.close() }
+        }
         media.setOnPreparedListener {
-            if (currentStory?.id != story.id || player !== media) return@setOnPreparedListener
+            closeDescriptor()
+            if (currentStory?.id != story.id || player !== media) {
+                media.release()
+                return@setOnPreparedListener
+            }
             media.start()
             applySpeed(media)
             mutableState.update {
@@ -161,12 +170,19 @@ object StoryTtsController {
             }
         }
         media.setOnCompletionListener {
-            if (player === media) {
-                main.post { stop() }
+            main.post {
+                if (player === media) {
+                    stop()
+                }
             }
         }
         media.setOnErrorListener { _, _, _ ->
-            main.post { stop() }
+            closeDescriptor()
+            main.post {
+                if (player === media) {
+                    stop()
+                }
+            }
             true
         }
         try {
@@ -177,13 +193,12 @@ object StoryTtsController {
             )
             media.prepareAsync()
         } catch (_: Exception) {
+            closeDescriptor()
             stopInternal(clearStory = false)
             mutableState.update {
                 it.copy(status = StoryVoiceStatus.Idle, available = false)
             }
             SleepRadioController.onNarrationEnded()
-        } finally {
-            runCatching { descriptor.close() }
         }
     }
 
